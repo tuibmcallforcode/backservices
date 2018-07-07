@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config({ silent: true });
+import "../env";
 
 import { serve, shutdown } from "./web";
 import debugMain from "debug";
