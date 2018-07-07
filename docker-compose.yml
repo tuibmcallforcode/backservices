@@ -1,0 +1,26 @@
+version: '3'
+services:
+  ibmtucfc_mongo: 
+    image: mongo:3.6
+    command: --smallfiles
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports: 
+    - 27017:27017 
+    volumes: 
+    - .docker/mongo/data:/data
+
+  ibmtucfc:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - .:/usr/src/ibmtucfc
+      - /usr/src/ibmtucfc/node_modules
+    environment:
+      - APP_ENV=development
+    depends_on:
+      - ibmtucfc_mongo
+    ports:
+      - 8080:8080

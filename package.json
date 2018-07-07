@@ -1,0 +1,32 @@
+{
+  "name": "ibm-realtimecommu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js --exec babel-node ",
+    "build": "babel src -d dist",
+    "serve": "node dist/index.js",
+    "test": "mocha --require js:babel-register"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "dotenv": "^6.0.0",
+    "koa": "^2.5.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "watson-developer-cloud": "^3.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint-config-prettier": "^2.9.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.17.5",
+    "prettier": "1.13.6"
+  }
+}
