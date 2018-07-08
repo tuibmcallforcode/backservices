@@ -1,23 +1,31 @@
-// import requireEnv from "require-environment-variables";
-// requireEnv(["NLU_USERNAME", "NLU_PASSWORD"]);
+if (
+	!process.env.NLU_IAM &&
+	(!process.env.NLU_USERNAME && !process.env.NLU_PASSWORD)
+) {
+	console.error("env for nlu not found");
+	process.exit(400);
+}
 
-import { promisify } from "util";
 import NaturalLanguageUnderstandingV1 from "watson-developer-cloud/natural-language-understanding/v1";
-import { resolve } from "url";
 
 const VERSION = "2018-03-16";
 
-const nlu_params = {
+const nluParams = {
 	features: {
 		semantic_roles: {}
 	}
 };
 
-const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
-	version: VERSION,
-	username: process.env.NLU_USERNAME,
-	password: process.env.NLU_PASSWORD
-});
+const authParams = process.env.NLU_IAM
+	? { iam_apikey: process.env.NLU_IAM }
+	: {
+			username: process.env.NLU_USERNAME,
+			password: process.env.NLU_PASSWORD
+	  };
+
+const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1(
+	Object.assign({}, { version: VERSION }, authParams)
+);
 
 function analyzeAsync(parameters) {
 	return new Promise((resolve, reject) => {
@@ -33,8 +41,7 @@ function analyzeAsync(parameters) {
 }
 
 export async function analyze(text) {
-	const parameters = Object.assign({ text }, nlu_params);
-
+	const parameters = Object.assign({}, { text }, nluParams);
 	return await analyzeAsync(parameters);
 }
 
@@ -50,7 +57,7 @@ export async function analyze(text) {
         "features": 1
     },
     "semantic_roles": [
-        {
+        {go
             "subject": {
                 "text": "A team of eight European experts"
             },
