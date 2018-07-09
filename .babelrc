@@ -9,5 +9,10 @@
 			}
 		]
 	],
-	"plugins": ["dynamic-import-node"]
+	"plugins": ["dynamic-import-node"],
+	"env":{
+		"production":{
+			"presets": ["minify"]
+		}
+	}
 }
