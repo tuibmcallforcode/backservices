@@ -76,5 +76,5 @@ typings/
 !.docker/**/.gitkeep
 .vscode
 
-dist/*
+dist/**
 !dist/.gitkeep
