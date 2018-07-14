@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <title>test audio stream</title>
+</head>
+
+<body>
+    <script>
+        function AudioRecorder(params = {}, onRecordProcessed) {
+            if (!onRecordProcessed) {
+                throw new Error("callback onRecordProcessed is not defined")
+            }
+            bufferSize = params.bufferSize || 2024;
+            var session = {
+                audio: true,
+                video: false
+            }
+
+            this.init = function () {
+                navigator.getUserMedia(session, initializeRecorder, onError);
+            }
+
+            var initializeRecorder = function initializeRecorder(stream) {
+                var audioContext = window.AudioContext;
+                var context = new audioContext();
+                var audioInput = context.createMediaStreamSource(stream);
+                var bufferSize = 2048;
+                // create a javascript node
+                var recorder = context.createJavaScriptNode(bufferSize, 1, 1);
+                // specify the processing function
+                recorder.onaudioprocess = recorderProcess;
+                // connect stream to our recorder
+                audioInput.connect(recorder);
+                // connect our recorder to the previous destination
+                recorder.connect(context.destination);
+            }
+
+            var recorderProcess = function recorderProcess(e) {
+                var left = e.inputBuffer.getChannelData(0);
+                // call to client
+                params.onRecordProcessed(convertFloat32ToInt16(left))
+            }
+
+            var convertFloat32ToInt16 = function convertFloat32ToInt16(buffer) {
+                l = buffer.length;
+                buf = new Int16Array(l);
+                while (l--) {
+                    buf[l] = Math.min(1, buffer[l]) * 0x7FFF;
+                }
+                return buf.buffer;
+            }
+
+            var onError = function onError() {
+                console.error("error audiorecorder : ", arguments);
+            }
+        }
+    </script>
+
+    <script>
+
+        var socket = new WebSocket('ws://127.0.0.1:3001/ws_ibm/ws');
+        console.log(socket)
+
+
+        // Connection opened
+        socket.addEventListener('open', function (event) {
+            socket.send('Hello Server!');
+        });
+
+        // Listen for messages
+        socket.addEventListener('message', function (event) {
+            console.log('Message from server ', event.data);
+        });
+    </script>
+
+    <script>
+        var rec = new AudioRecorder({}, function (aud) {
+            console.log(aud);
+        });
+        rec.init();
+    </script>
+</body>
+
+</html>
