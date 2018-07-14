@@ -1,5 +1,5 @@
-import { analyze } from "../controllers/ibm/nlu.js";
-import { translate } from "../controllers/ibm/translate";
+import { analyze } from "../../controllers/ibm/nlu.js";
+import { translate } from "../../controllers/ibm/translate";
 
 async function nluAnalyzeHandler(ctx) {
 	const { text } = ctx.request.body;

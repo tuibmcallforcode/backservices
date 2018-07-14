@@ -23,10 +23,11 @@
             var initializeRecorder = function initializeRecorder(stream) {
                 var audioContext = window.AudioContext;
                 var context = new audioContext();
+                console.log(context.sampleRate)
                 var audioInput = context.createMediaStreamSource(stream);
                 var bufferSize = 2048;
                 // create a javascript node
-                var recorder = context.createJavaScriptNode(bufferSize, 1, 1);
+                var recorder = context.createScriptProcessor(bufferSize, 1, 1);
                 // specify the processing function
                 recorder.onaudioprocess = recorderProcess;
                 // connect stream to our recorder
@@ -38,7 +39,11 @@
             var recorderProcess = function recorderProcess(e) {
                 var left = e.inputBuffer.getChannelData(0);
                 // call to client
-                params.onRecordProcessed(convertFloat32ToInt16(left))
+                // var buf = new Uint8Array(left).buffer;
+
+                // onRecordProcessed(buf)
+                onRecordProcessed(convertFloat32ToInt16(left));
+
             }
 
             var convertFloat32ToInt16 = function convertFloat32ToInt16(buffer) {
@@ -58,13 +63,9 @@
 
     <script>
 
-        var socket = new WebSocket('ws://127.0.0.1:3001/ws_ibm/ws');
-        console.log(socket)
-
-
+        var socket = new WebSocket('ws://127.0.0.1:3000/ws_ibm_stt');
         // Connection opened
         socket.addEventListener('open', function (event) {
-            socket.send('Hello Server!');
         });
 
         // Listen for messages
@@ -75,7 +76,8 @@
 
     <script>
         var rec = new AudioRecorder({}, function (aud) {
-            console.log(aud);
+            // console.log(aud);
+            socket.send(aud)
         });
         rec.init();
     </script>
