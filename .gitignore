@@ -80,3 +80,6 @@ dist/**
 !dist/.gitkeep
 
 *.wav
+
+#MacOS seeds
+.DS_Store

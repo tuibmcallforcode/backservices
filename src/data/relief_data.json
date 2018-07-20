@@ -1,0 +1,535 @@
+[
+	{
+		"id": "2662779",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2662779",
+		"fields": {
+			"date": {
+				"original": "2018-06-21T00:00:00+00:00",
+				"changed": "2018-06-21T06:38:09+00:00",
+				"created": "2018-06-21T03:29:14+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/188",
+					"id": 188,
+					"name": "Philippines",
+					"shortname": "Philippines",
+					"iso3": "phl",
+					"location": { "lat": 11.74, "lon": 122.88 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/188",
+				"id": 188,
+				"name": "Philippines",
+				"shortname": "Philippines",
+				"iso3": "phl",
+				"location": { "lat": 11.74, "lon": 122.88 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/697",
+					"id": 697,
+					"name": "Government of the Philippines",
+					"shortname": "Govt. Philippines",
+					"longname": "Government of the Philippines",
+					"spanish_name": "Gobierno de Filipinas",
+					"homepage": "http://www.gov.ph/",
+					"type": { "id": 271, "name": "Government" }
+				}
+			],
+			"title":
+				"OCD XII to lead 2nd qtr nationwide earthquake drill in Soccsksargen",
+			"url": "https://reliefweb.int/node/2662779",
+			"status": "published",
+			"id": 2662779,
+			"body":
+				"By Catherine Apelacio\n\n\nGENERAL SANTOS CITY, June 19 (PIA)---- The Office of Civil Defense (OCD) XII will lead on Thursday (June 21) the 2nd quarter National Simultaneous Earthquake Drill (NSED) in Soccsksargen (Region XII), featuring the event's official tagline “Bida ang Handa.”  \n\n“We encourage everyone to join the #BidaAngHanda campaign in support of the 2nd quarter NSED on June 21, 2:00pm,” said OCD XII Regional Director Minda Morante in an advisory to the members of the Regional Disaster Risk Reduction and Management Council (RDRRMC) XII where she also serves as chair.  \n\nMorante said “the main goal of NSED is to gather the maximum number of commitments via social media.”  \n\nNSED is a national event which involves the participation of government entities, non-governmental oganizations, private and academic institutions, media, as well as other stakeholders. \n\nMorante said all stakeholders are expected to participate in the event by doing and documenting their own drills in their respective area. The municipality of Carmen, North Cotabato is Soccsksargen's pilot site.\n\n“We invite the public to post photos or videos doing the simulation drill or showing what they do to be prepared for earthquakes and other hazards,” Morante added, asking everyone to tag OCD XII in their status update about NSED on Facebook. \n\nThe posting of photos and videos of the drill must contain #BidaAngHanda across all social media platforms, said OCD XII information officer Jorie Mae Balmediano. \n\nShe also articulated the spoken statement that all participants must recite in the video: “Sa June 21, 2018, ganap na alas-dos ng hapon, sama-sama tayong mag DUCK, COVER and HOLD, dahil bida ang handa!” \n\nIn addition, she said agencies can showcase on their videos or photos what other initiatives they had already made in order to be ready when calamity occurs. \n\nMorante believes that people’s sharing videos and photos of their “earthquake drill experiences” is one way of translating their commitment to help government achieve disaster preparedness and resiliency for the long haul. \n\nShe said their cooperation only shows that they are supporting the nationwide earthquake drill, which is conducted quarterly every year. (CT Apelacio/PIA 12 Sarangani-General Santos City)",
+			"origin": "http://pia.gov.ph/news/articles/1009266",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [{ "id": 4591, "name": "Disaster Management" }],
+			"format": [{ "id": 8, "name": "News and Press Release" }],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/report/philippines/ocd-xii-lead-2nd-qtr-nationwide-earthquake-drill-soccsksargen",
+			"body-html":
+				"<p>By Catherine Apelacio</p>\n\n<p>GENERAL SANTOS CITY, June 19 (PIA)---- The Office of Civil Defense (OCD) XII will lead on Thursday (June 21) the 2nd quarter National Simultaneous Earthquake Drill (NSED) in Soccsksargen (Region XII), featuring the event&#39;s official tagline “Bida ang Handa.”  </p>\n\n<p>“We encourage everyone to join the #BidaAngHanda campaign in support of the 2nd quarter NSED on June 21, 2:00pm,” said OCD XII Regional Director Minda Morante in an advisory to the members of the Regional Disaster Risk Reduction and Management Council (RDRRMC) XII where she also serves as chair.  </p>\n\n<p>Morante said “the main goal of NSED is to gather the maximum number of commitments via social media.”  </p>\n\n<p>NSED is a national event which involves the participation of government entities, non-governmental oganizations, private and academic institutions, media, as well as other stakeholders. </p>\n\n<p>Morante said all stakeholders are expected to participate in the event by doing and documenting their own drills in their respective area. The municipality of Carmen, North Cotabato is Soccsksargen&#39;s pilot site.</p>\n\n<p>“We invite the public to post photos or videos doing the simulation drill or showing what they do to be prepared for earthquakes and other hazards,” Morante added, asking everyone to tag OCD XII in their status update about NSED on Facebook. </p>\n\n<p>The posting of photos and videos of the drill must contain #BidaAngHanda across all social media platforms, said OCD XII information officer Jorie Mae Balmediano. </p>\n\n<p>She also articulated the spoken statement that all participants must recite in the video: “Sa June 21, 2018, ganap na alas-dos ng hapon, sama-sama tayong mag DUCK, COVER and HOLD, dahil bida ang handa!” </p>\n\n<p>In addition, she said agencies can showcase on their videos or photos what other initiatives they had already made in order to be ready when calamity occurs. </p>\n\n<p>Morante believes that people’s sharing videos and photos of their “earthquake drill experiences” is one way of translating their commitment to help government achieve disaster preparedness and resiliency for the long haul. </p>\n\n<p>She said their cooperation only shows that they are supporting the nationwide earthquake drill, which is conducted quarterly every year. (CT Apelacio/PIA 12 Sarangani-General Santos City)</p>\n"
+		}
+	},
+	{
+		"id": "2685334",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2685334",
+		"fields": {
+			"date": {
+				"original": "2018-05-03T00:00:00+00:00",
+				"changed": "2018-07-06T05:43:09+00:00",
+				"created": "2018-07-06T03:03:46+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/168",
+					"id": 168,
+					"name": "Nepal",
+					"iso3": "npl",
+					"location": { "lat": 28.25, "lon": 83.94 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/168",
+				"id": 168,
+				"name": "Nepal",
+				"iso3": "npl",
+				"location": { "lat": 28.25, "lon": 83.94 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/33636",
+					"id": 33636,
+					"name": "Housing Recovery and Reconstruction Platform – Nepal (HRRP)",
+					"shortname": "HRRP",
+					"longname": "Housing Recovery and Reconstruction Platform – Nepal",
+					"homepage": "http://www.hrrpnepal.org/",
+					"type": { "id": 275, "name": "Other" }
+				}
+			],
+			"title":
+				"Nepal: Administrative and Earthquake Damage Grades Map | Bhaktapur District (3 May 2018)",
+			"url": "https://reliefweb.int/node/2685334",
+			"status": "published",
+			"id": 2685334,
+			"body":
+				"Note:\n\nThis map shows Administrative boundary of Rural Municipality, Muncipality, Sub Metropolitan City and Metropolitan City with Earthquake damage grades to housing structures",
+			"file": [
+				{
+					"id": "1125794",
+					"description": "",
+					"url":
+						"https://reliefweb.int/sites/reliefweb.int/files/resources/dCEmgGUYkfzujocP1ZKT_2018_05_03.pdf",
+					"filename": "dCEmgGUYkfzujocP1ZKT_2018_05_03.pdf",
+					"mimetype": "application/pdf",
+					"filesize": "2169025",
+					"preview": {
+						"url":
+							"https://reliefweb.int/sites/reliefweb.int/files/resources-pdf-previews/1125794-dCEmgGUYkfzujocP1ZKT_2018_05_03.png",
+						"url-large":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-large/public/resources-pdf-previews/1125794-dCEmgGUYkfzujocP1ZKT_2018_05_03.png",
+						"url-small":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/1125794-dCEmgGUYkfzujocP1ZKT_2018_05_03.png",
+						"url-thumb":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/m/public/resources-pdf-previews/1125794-dCEmgGUYkfzujocP1ZKT_2018_05_03.png"
+					}
+				}
+			],
+			"origin":
+				"http://hrrpnepal.org/maps-infographics-detail/view/damage-grades-map-bhaktapur-district",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [{ "id": 4601, "name": "Recovery and Reconstruction" }],
+			"format": [{ "id": 12, "name": "Map" }],
+			"disaster": [
+				{
+					"id": 21246,
+					"name": "Nepal: Earthquakes - Apr 2015",
+					"glide": "EQ-2015-000048-NPL",
+					"type": [
+						{ "id": 4628, "name": "Earthquake", "code": "EQ", "primary": true }
+					]
+				}
+			],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/map/nepal/nepal-administrative-and-earthquake-damage-grades-map-bhaktapur-district-3-may-2018",
+			"body-html":
+				"<p>Note:</p>\n\n<p>This map shows Administrative boundary of Rural Municipality, Muncipality, Sub Metropolitan City and Metropolitan City with Earthquake damage grades to housing structures</p>\n"
+		}
+	},
+	{
+		"id": "2642704",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2642704",
+		"fields": {
+			"date": {
+				"original": "2018-06-07T00:00:00+00:00",
+				"changed": "2018-06-07T16:34:29+00:00",
+				"created": "2018-06-07T15:19:46+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/244",
+					"id": 244,
+					"name": "United Republic of Tanzania",
+					"shortname": "Tanzania",
+					"iso3": "tza",
+					"location": { "lat": -6.27, "lon": 34.82 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/244",
+				"id": 244,
+				"name": "United Republic of Tanzania",
+				"shortname": "Tanzania",
+				"iso3": "tza",
+				"location": { "lat": -6.27, "lon": 34.82 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/1006",
+					"id": 1006,
+					"name": "UN Office for Disaster Risk Reduction",
+					"shortname": "UNISDR",
+					"longname": "United Nations International Strategy for Disaster Reduction",
+					"spanish_name": "Estrategia Internacional para la reducción de desastres",
+					"homepage": "Http://www.unisdr.org",
+					"type": { "id": 272, "name": "International Organization" }
+				}
+			],
+			"title": "Tanzania earthquake prompts safe schools initiative",
+			"url": "https://reliefweb.int/node/2642704",
+			"status": "published",
+			"id": 2642704,
+			"body":
+				"*By Samuel Okiror*\n\n**DODOMA, 7 June 2018 -** In September 2016, an earthquake of magnitude 5.9 struck Nsunga in Kagera region, northwestern Tanzania, killing at least 19 people and injuring 253 others. A group of 15 boys from Ihungo Secondary School in Bukoba district were among the dead. Over 800 buildings were destroyed.\n\nBut under an initiative by the government, in partnership with the UN, children in Tanzania are set to play an important role in disaster risk reduction by contributing to the enhanced awareness and preparedness of their communities.\n\nRecognizing the importance of including children in disaster risk reduction, authorities in the capital city Dodoma are equipping them with the necessary skills and knowledge which they can then share with family members to positively impact entire communities.\n\n“In Tanzania, considerable progress has been made to address the Sendai Framework including building resilience and skills for school children through Education in Emergency (EiE) simulations and drills on preparedness and response during common emergencies,” said Charles Msangi, Disaster Management Coordinator from the Prime Minister’s Office.\n\nChildren and youth are recognized as critical stakeholders and agents of change in the Sendai Framework for Disaster Risk Reduction, which points to a need to ensure that their capacity and talent is nurtured and modalities and space for their input are made available.\n\nThe Ministry of Education, Science and Technology and the President’s Office Regional Administration and Local Government, with support from the United Nations Children Fund, UNICEF, are carrying out capacity building for school children to build resilience through disaster response simulation drills, integrating EiE issues into school clubs and mapping the level of schools’ preparedness and response to emergencies and disasters.\n\nTanzania has an established disaster loss database that seeks to quantify the cost of disasters when they occur and to support risk-informed investment. The database was implemented with support from UNISDR as part of the “Building Disaster Resilience to Natural Hazards in Sub-Saharan African Regions, Countries and Communities Programme”, funded by the European Union (EU) and being implemented as part of a cooperation between the EU and the African, Caribbean and Pacific Group of States (ACP).\n\nUnder the programme, Tanzania is also one of sixteen countries where risk profiles on flood and drought are being generated by UNISDR in partnership with the CIMA Research Foundation (the International Centre for Environmental Monitoring).\n\nAt the national level, Tanzania adopted a National Disaster Management to streamline DRR coordination and set out clear legal, institutional frameworks. The country will also be participating in training on the online Sendai Framework Monitoring Tool, launched in March this year, which will help track global progress on reducing disaster losses.\n\nHazards have contributed to high poverty levels in the Tanzania. The World Bank estimates that more than 28 percent of the population’s income is below the basic needs line. Approximately 12 million Tanzanians live below the national poverty line.\n\n[Sendai Framework for Disaster Risk Reduction 2015-2030](https://www.unisdr.org/we/inform/publications/43291)\n\n**Date:**\n7 Jun 2018\n\n**Sources:**\nUnited Nations Office for Disaster Risk Reduction - Regional Office for Africa (UNISDR AF)",
+			"origin": "https://www.unisdr.org/archive/58664",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [
+				{ "id": 4591, "name": "Disaster Management" },
+				{ "id": 4592, "name": "Education" }
+			],
+			"format": [{ "id": 8, "name": "News and Press Release" }],
+			"disaster": [
+				{
+					"id": 36681,
+					"name": "Tanzania: Earthquake - Sept 2016",
+					"glide": "EQ-2016-000098-TZA",
+					"type": [
+						{ "id": 4628, "name": "Earthquake", "code": "EQ", "primary": true }
+					]
+				}
+			],
+			"disaster_type": [
+				{ "id": 4672, "name": "Drought", "code": "DR" },
+				{ "id": 4628, "name": "Earthquake", "code": "EQ" },
+				{ "id": 4611, "name": "Flood", "code": "FL" }
+			],
+			"vulnerable_groups": [{ "id": 6871, "name": "Children" }],
+			"url_alias":
+				"https://reliefweb.int/report/united-republic-tanzania/tanzania-earthquake-prompts-safe-schools-initiative",
+			"body-html":
+				"<p><em>By Samuel Okiror</em></p>\n\n<p><strong>DODOMA, 7 June 2018 -</strong> In September 2016, an earthquake of magnitude 5.9 struck Nsunga in Kagera region, northwestern Tanzania, killing at least 19 people and injuring 253 others. A group of 15 boys from Ihungo Secondary School in Bukoba district were among the dead. Over 800 buildings were destroyed.</p>\n\n<p>But under an initiative by the government, in partnership with the UN, children in Tanzania are set to play an important role in disaster risk reduction by contributing to the enhanced awareness and preparedness of their communities.</p>\n\n<p>Recognizing the importance of including children in disaster risk reduction, authorities in the capital city Dodoma are equipping them with the necessary skills and knowledge which they can then share with family members to positively impact entire communities.</p>\n\n<p>“In Tanzania, considerable progress has been made to address the Sendai Framework including building resilience and skills for school children through Education in Emergency (EiE) simulations and drills on preparedness and response during common emergencies,” said Charles Msangi, Disaster Management Coordinator from the Prime Minister’s Office.</p>\n\n<p>Children and youth are recognized as critical stakeholders and agents of change in the Sendai Framework for Disaster Risk Reduction, which points to a need to ensure that their capacity and talent is nurtured and modalities and space for their input are made available.</p>\n\n<p>The Ministry of Education, Science and Technology and the President’s Office Regional Administration and Local Government, with support from the United Nations Children Fund, UNICEF, are carrying out capacity building for school children to build resilience through disaster response simulation drills, integrating EiE issues into school clubs and mapping the level of schools’ preparedness and response to emergencies and disasters.</p>\n\n<p>Tanzania has an established disaster loss database that seeks to quantify the cost of disasters when they occur and to support risk-informed investment. The database was implemented with support from UNISDR as part of the “Building Disaster Resilience to Natural Hazards in Sub-Saharan African Regions, Countries and Communities Programme”, funded by the European Union (EU) and being implemented as part of a cooperation between the EU and the African, Caribbean and Pacific Group of States (ACP).</p>\n\n<p>Under the programme, Tanzania is also one of sixteen countries where risk profiles on flood and drought are being generated by UNISDR in partnership with the CIMA Research Foundation (the International Centre for Environmental Monitoring).</p>\n\n<p>At the national level, Tanzania adopted a National Disaster Management to streamline DRR coordination and set out clear legal, institutional frameworks. The country will also be participating in training on the online Sendai Framework Monitoring Tool, launched in March this year, which will help track global progress on reducing disaster losses.</p>\n\n<p>Hazards have contributed to high poverty levels in the Tanzania. The World Bank estimates that more than 28 percent of the population’s income is below the basic needs line. Approximately 12 million Tanzanians live below the national poverty line.</p>\n\n<p><a href=\"https://www.unisdr.org/we/inform/publications/43291\">Sendai Framework for Disaster Risk Reduction 2015-2030</a></p>\n\n<p><strong>Date:</strong>\n7 Jun 2018</p>\n\n<p><strong>Sources:</strong>\nUnited Nations Office for Disaster Risk Reduction - Regional Office for Africa (UNISDR AF)</p>\n"
+		}
+	},
+	{
+		"id": "2701779",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2701779",
+		"fields": {
+			"date": {
+				"original": "2018-07-17T00:00:00+00:00",
+				"changed": "2018-07-18T06:31:02+00:00",
+				"created": "2018-07-18T06:21:01+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/168",
+					"id": 168,
+					"name": "Nepal",
+					"iso3": "npl",
+					"location": { "lat": 28.25, "lon": 83.94 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/168",
+				"id": 168,
+				"name": "Nepal",
+				"iso3": "npl",
+				"location": { "lat": 28.25, "lon": 83.94 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/33636",
+					"id": 33636,
+					"name": "Housing Recovery and Reconstruction Platform – Nepal (HRRP)",
+					"shortname": "HRRP",
+					"longname": "Housing Recovery and Reconstruction Platform – Nepal",
+					"homepage": "http://www.hrrpnepal.org/",
+					"type": { "id": 275, "name": "Other" }
+				}
+			],
+			"title":
+				"Nepal: Urban wards across the 32 earthquake affected districts (17 July 2018)",
+			"url": "https://reliefweb.int/node/2701779",
+			"status": "published",
+			"id": 2701779,
+			"file": [
+				{
+					"id": "1132064",
+					"description": "",
+					"url":
+						"https://reliefweb.int/sites/reliefweb.int/files/resources/Urban%20wards%20across%20the%2032%20earthquake%20affected%20districts_0.pdf",
+					"filename": "Urban wards across the 32 earthquake affected districts.pdf",
+					"mimetype": "application/pdf",
+					"filesize": "1761086",
+					"preview": {
+						"url":
+							"https://reliefweb.int/sites/reliefweb.int/files/resources-pdf-previews/1132064-Urban%20wards%20across%20the%2032%20earthquake%20affected%20districts.png",
+						"url-large":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-large/public/resources-pdf-previews/1132064-Urban%20wards%20across%20the%2032%20earthquake%20affected%20districts.png",
+						"url-small":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/1132064-Urban%20wards%20across%20the%2032%20earthquake%20affected%20districts.png",
+						"url-thumb":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/m/public/resources-pdf-previews/1132064-Urban%20wards%20across%20the%2032%20earthquake%20affected%20districts.png"
+					}
+				}
+			],
+			"origin":
+				"http://hrrpnepal.org/maps-infographics-detail/view/urban-wards-across-the-32-earthquake-affected-districts",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [{ "id": 4601, "name": "Recovery and Reconstruction" }],
+			"format": [{ "id": 12, "name": "Map" }],
+			"disaster": [
+				{
+					"id": 21246,
+					"name": "Nepal: Earthquakes - Apr 2015",
+					"glide": "EQ-2015-000048-NPL",
+					"type": [
+						{ "id": 4628, "name": "Earthquake", "code": "EQ", "primary": true }
+					]
+				}
+			],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/map/nepal/nepal-urban-wards-across-32-earthquake-affected-districts-17-july-2018"
+		}
+	},
+	{
+		"id": "2685284",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2685284",
+		"fields": {
+			"date": {
+				"original": "2018-07-06T00:00:00+00:00",
+				"changed": "2018-07-06T05:37:14+00:00",
+				"created": "2018-07-06T02:37:16+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/188",
+					"id": 188,
+					"name": "Philippines",
+					"shortname": "Philippines",
+					"iso3": "phl",
+					"location": { "lat": 11.74, "lon": 122.88 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/188",
+				"id": 188,
+				"name": "Philippines",
+				"shortname": "Philippines",
+				"iso3": "phl",
+				"location": { "lat": 11.74, "lon": 122.88 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/697",
+					"id": 697,
+					"name": "Government of the Philippines",
+					"shortname": "Govt. Philippines",
+					"longname": "Government of the Philippines",
+					"spanish_name": "Gobierno de Filipinas",
+					"homepage": "http://www.gov.ph/",
+					"type": { "id": 271, "name": "Government" }
+				}
+			],
+			"title":
+				"DOST PHIVOLCS-7 launches earthquake impact assessment tool for Metro Cebu",
+			"url": "https://reliefweb.int/node/2685284",
+			"status": "published",
+			"id": 2685284,
+			"body":
+				"By Rey Anthony H. Chiu\n\nCEBU CITY, July 4 (PIA)–Department of Science and Technology-Philippine Institute of Volcanology and Seismology (DOST-PHIVOLCS) launched an earthquake impact assessment tool, the Metro Cebu Earthquake Model (MCEM) Atlas on July 4, 2018 at DepEdEcotech Center, Ecotech Rd., Sudlon, Lahug, Cebu City.\n\nThe MCEM Atlas is a probabilistic seismic ground motion hazard assessment specific for Metro Cebu, considering that Metro Cebu has an existing faulty system that could be a source of a huge tremor. \n\nThe Central Cebu Fault System runs through the mountain ridges of Danao City in the north to San Fernando in the south.\n\nIt is an earthquake impact assessment tool to support risk reduction efforts of government agencies and local government units in Metro Cebu, PHIVOLCS Usec Renatoi Solidum said.\n\nIt aims to help communities minimize the damage to buildings and infrastructure in case of an earthquake, he added.\n\nThe Atlas includes seismicity map of Metro Cebu and neighboring cities – Cebu City, Lapu-lapu City, Mandaue City, Talisay City, Naga City, Danao City, Compostela, Liloan, and San Fernando.\n\n“Kung mapapagtibay natin ang mga bahay, gusali, at imprastraktura, hindi na natin kailangan mag responde ng malaki (If we can strengthen houses, buildings and infrastructures, we no longer need a massive response effort),” said DOST-PHIVOLCS Usec. Renato Solidum, Jr. on the positive impact of Atlas in relation to disaster risk reduction management.\n\n“Science is telling us that while we cannot control earthquake, but we can actually prepare for it,” added Director Evelyn Nacario Castro of Metro Cebu Development Coordinating Board (MCDCB).\n\nMeanwhile, Mr. Baltazar S. Tribunalo, Head of Cebu Provincial Risk Reduction and Management Office, pushes for localized version of Atlas to further information dissemination to the masses.\n\nIn January 2018, DOST-PHIVOLCS launched Philippine Earthquake Model (PEM)covering the whole country. Next will be Metro Davao. (Bridgette May Bayhon/PIA7)",
+			"origin": "http://pia.gov.ph/news/articles/1010041",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [{ "id": 4591, "name": "Disaster Management" }],
+			"format": [{ "id": 8, "name": "News and Press Release" }],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/report/philippines/dost-phivolcs-7-launches-earthquake-impact-assessment-tool-metro-cebu",
+			"body-html":
+				"<p>By Rey Anthony H. Chiu</p>\n\n<p>CEBU CITY, July 4 (PIA)–Department of Science and Technology-Philippine Institute of Volcanology and Seismology (DOST-PHIVOLCS) launched an earthquake impact assessment tool, the Metro Cebu Earthquake Model (MCEM) Atlas on July 4, 2018 at DepEdEcotech Center, Ecotech Rd., Sudlon, Lahug, Cebu City.</p>\n\n<p>The MCEM Atlas is a probabilistic seismic ground motion hazard assessment specific for Metro Cebu, considering that Metro Cebu has an existing faulty system that could be a source of a huge tremor. </p>\n\n<p>The Central Cebu Fault System runs through the mountain ridges of Danao City in the north to San Fernando in the south.</p>\n\n<p>It is an earthquake impact assessment tool to support risk reduction efforts of government agencies and local government units in Metro Cebu, PHIVOLCS Usec Renatoi Solidum said.</p>\n\n<p>It aims to help communities minimize the damage to buildings and infrastructure in case of an earthquake, he added.</p>\n\n<p>The Atlas includes seismicity map of Metro Cebu and neighboring cities – Cebu City, Lapu-lapu City, Mandaue City, Talisay City, Naga City, Danao City, Compostela, Liloan, and San Fernando.</p>\n\n<p>“Kung mapapagtibay natin ang mga bahay, gusali, at imprastraktura, hindi na natin kailangan mag responde ng malaki (If we can strengthen houses, buildings and infrastructures, we no longer need a massive response effort),” said DOST-PHIVOLCS Usec. Renato Solidum, Jr. on the positive impact of Atlas in relation to disaster risk reduction management.</p>\n\n<p>“Science is telling us that while we cannot control earthquake, but we can actually prepare for it,” added Director Evelyn Nacario Castro of Metro Cebu Development Coordinating Board (MCDCB).</p>\n\n<p>Meanwhile, Mr. Baltazar S. Tribunalo, Head of Cebu Provincial Risk Reduction and Management Office, pushes for localized version of Atlas to further information dissemination to the masses.</p>\n\n<p>In January 2018, DOST-PHIVOLCS launched Philippine Earthquake Model (PEM)covering the whole country. Next will be Metro Davao. (Bridgette May Bayhon/PIA7)</p>\n"
+		}
+	},
+	{
+		"id": "2683494",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2683494",
+		"fields": {
+			"date": {
+				"original": "2018-07-04T00:00:00+00:00",
+				"changed": "2018-07-05T07:38:09+00:00",
+				"created": "2018-07-05T04:51:10+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/188",
+					"id": 188,
+					"name": "Philippines",
+					"shortname": "Philippines",
+					"iso3": "phl",
+					"location": { "lat": 11.74, "lon": 122.88 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/188",
+				"id": 188,
+				"name": "Philippines",
+				"shortname": "Philippines",
+				"iso3": "phl",
+				"location": { "lat": 11.74, "lon": 122.88 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/1503",
+					"id": 1503,
+					"name": "UN Office for the Coordination of Humanitarian Affairs",
+					"shortname": "OCHA",
+					"longname":
+						"United Nations Office for the Coordination of Humanitarian Affairs",
+					"spanish_name": "Oficina de Coordinación de Asuntos Humanitarios",
+					"homepage": "http://www.unocha.org/",
+					"type": { "id": 272, "name": "International Organization" }
+				}
+			],
+			"title":
+				"Philippines: Asia-Pacific 2018 INSARAG Earthquake Response Exercise (04 July 2018)",
+			"url": "https://reliefweb.int/node/2683494",
+			"status": "published",
+			"id": 2683494,
+			"file": [
+				{
+					"id": "1125134",
+					"description": "",
+					"url":
+						"https://reliefweb.int/sites/reliefweb.int/files/resources/180704%20OCHA%20PHL%20INSARAG%20exercise.pdf",
+					"filename": "180704 OCHA PHL INSARAG exercise.pdf",
+					"mimetype": "application/pdf",
+					"filesize": "604579",
+					"preview": {
+						"url":
+							"https://reliefweb.int/sites/reliefweb.int/files/resources-pdf-previews/1125134-180704%20OCHA%20PHL%20INSARAG%20exercise.png",
+						"url-large":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-large/public/resources-pdf-previews/1125134-180704%20OCHA%20PHL%20INSARAG%20exercise.png",
+						"url-small":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/1125134-180704%20OCHA%20PHL%20INSARAG%20exercise.png",
+						"url-thumb":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/m/public/resources-pdf-previews/1125134-180704%20OCHA%20PHL%20INSARAG%20exercise.png"
+					}
+				}
+			],
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"theme": [
+				{ "id": 4590, "name": "Coordination" },
+				{ "id": 4591, "name": "Disaster Management" }
+			],
+			"format": [{ "id": 12570, "name": "Infographic" }],
+			"ocha_product": [{ "id": 12356, "name": "Infographic" }],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/report/philippines/philippines-asia-pacific-2018-insarag-earthquake-response-exercise-04-july-2018"
+		}
+	},
+	{
+		"id": "2547359",
+		"score": 4.884407,
+		"href": "https://api.reliefweb.int/v1/reports/2547359",
+		"fields": {
+			"date": {
+				"original": "2018-04-07T00:00:00+00:00",
+				"changed": "2018-04-07T14:01:03+00:00",
+				"created": "2018-04-07T11:06:56+00:00"
+			},
+			"country": [
+				{
+					"href": "https://api.reliefweb.int/v1/countries/185",
+					"id": 185,
+					"name": "Papua New Guinea",
+					"shortname": "PNG",
+					"iso3": "png",
+					"location": { "lat": -6.48, "lon": 145.24 },
+					"primary": true
+				}
+			],
+			"primary_country": {
+				"href": "https://api.reliefweb.int/v1/countries/185",
+				"id": 185,
+				"name": "Papua New Guinea",
+				"shortname": "PNG",
+				"iso3": "png",
+				"location": { "lat": -6.48, "lon": 145.24 }
+			},
+			"source": [
+				{
+					"href": "https://api.reliefweb.int/v1/sources/1741",
+					"id": 1741,
+					"name": "World Food Programme",
+					"shortname": "WFP",
+					"longname": "United Nations World Food Programme",
+					"spanish_name": "Programa Mundial de Alimentos",
+					"homepage": "http://www.wfp.org",
+					"type": { "id": 272, "name": "International Organization" }
+				}
+			],
+			"title":
+				"Earthquake in Southern Highlands, Papua New Guinea. 88km WSW of Porgera. Magnitude: 6.3 Depth: 10.0",
+			"url": "https://reliefweb.int/node/2547359",
+			"status": "published",
+			"id": 2547359,
+			"file": [
+				{
+					"id": "1073759",
+					"description": "",
+					"url":
+						"https://reliefweb.int/sites/reliefweb.int/files/resources/eq_us2000dvwq.pdf",
+					"filename": "eq_us2000dvwq.pdf",
+					"mimetype": "application/pdf",
+					"filesize": "1149523",
+					"preview": {
+						"url":
+							"https://reliefweb.int/sites/reliefweb.int/files/resources-pdf-previews/1073759-eq_us2000dvwq.png",
+						"url-large":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-large/public/resources-pdf-previews/1073759-eq_us2000dvwq.png",
+						"url-small":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/attachment-small/public/resources-pdf-previews/1073759-eq_us2000dvwq.png",
+						"url-thumb":
+							"https://reliefweb.int/sites/reliefweb.int/files/styles/m/public/resources-pdf-previews/1073759-eq_us2000dvwq.png"
+					}
+				}
+			],
+			"origin":
+				"https://geonode.wfp.org/wfpdocs/earthquake-in-southern-highlands-papua-new-guinea-88km-wsw-of-porgera-magnitude-63-depth-100/",
+			"language": [{ "id": 267, "name": "English", "code": "en" }],
+			"format": [{ "id": 12, "name": "Map" }],
+			"disaster": [
+				{
+					"id": 45224,
+					"name": "Papua New Guinea: Earthquakes - Feb 2018",
+					"glide": "EQ-2018-000020-PNG",
+					"type": [
+						{ "id": 4628, "name": "Earthquake", "code": "EQ", "primary": true },
+						{ "id": 4728, "name": "Land Slide", "code": "LS" }
+					]
+				}
+			],
+			"disaster_type": [{ "id": 4628, "name": "Earthquake", "code": "EQ" }],
+			"url_alias":
+				"https://reliefweb.int/map/papua-new-guinea/earthquake-southern-highlands-papua-new-guinea-88km-wsw-porgera-magnitude-63"
+		}
+	}
+]

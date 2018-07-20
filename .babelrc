@@ -9,9 +9,9 @@
 			}
 		]
 	],
-	"plugins": ["dynamic-import-node"],
-	"env":{
-		"production":{
+	"plugins": ["dynamic-import-node", "transform-object-rest-spread"],
+	"env": {
+		"production": {
 			"presets": ["minify"]
 		}
 	}
