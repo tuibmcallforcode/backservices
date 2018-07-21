@@ -1,9 +1,9 @@
 if (
-	!process.env.NLU_IAM &&
-	(!process.env.NLU_USERNAME && !process.env.NLU_PASSWORD)
+    !process.env.NLU_IAM &&
+    (!process.env.NLU_USERNAME && !process.env.NLU_PASSWORD)
 ) {
-	console.error("env for nlu not found");
-	process.exit(400);
+    console.error("env for nlu not found");
+    process.exit(400);
 }
 
 import NaturalLanguageUnderstandingV1 from "watson-developer-cloud/natural-language-understanding/v1";
@@ -11,38 +11,51 @@ import NaturalLanguageUnderstandingV1 from "watson-developer-cloud/natural-langu
 const VERSION = "2018-03-16";
 
 const nluParams = {
-	features: {
-		semantic_roles: {}
-	}
+    features: {
+        semantic_roles: {},
+        entities: {
+            emotion: true,
+            sentiment: true,
+            limit: 2
+        },
+        keywords: {
+            emotion: true,
+            sentiment: true,
+            limit: 2
+        },
+        relations:{},
+        categories:{}
+
+    }
 };
 
 const authParams = process.env.NLU_IAM
-	? { iam_apikey: process.env.NLU_IAM }
-	: {
-			username: process.env.NLU_USERNAME,
-			password: process.env.NLU_PASSWORD
-	  };
+    ? { iam_apikey: process.env.NLU_IAM }
+    : {
+        username: process.env.NLU_USERNAME,
+        password: process.env.NLU_PASSWORD
+    };
 
 const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1(
-	Object.assign({}, { version: VERSION }, authParams)
+    Object.assign({}, { version: VERSION }, authParams)
 );
 
 function analyzeAsync(parameters) {
-	return new Promise((resolve, reject) => {
-		naturalLanguageUnderstanding.analyze(parameters, (err, response) => {
-			if (err) {
-				reject(err);
-				return;
-			}
-			resolve(response);
-			return;
-		});
-	});
+    return new Promise((resolve, reject) => {
+        naturalLanguageUnderstanding.analyze(parameters, (err, response) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve(response);
+            return;
+        });
+    });
 }
 
 export async function analyze(text) {
-	const parameters = Object.assign({}, { text }, nluParams);
-	return await analyzeAsync(parameters);
+    const parameters = Object.assign({}, { text }, nluParams);
+    return await analyzeAsync(parameters);
 }
 
 /**
