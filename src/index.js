@@ -21,7 +21,7 @@ const port = process.env.PORT || 3000,
 		process.exit();
 	})
 );
-mongoose.connect('mongodb://localhost:27017/callforcode',(err)=>{
+mongoose.connect('mongodb://root:example@localhost:27017/',(err)=>{
 	if(err)
 		console.log(err);
 })

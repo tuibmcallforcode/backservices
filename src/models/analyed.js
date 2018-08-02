@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var analyzedSchema = new Schema({
-	usage: { text_units: number, text_characters: number, features: number },
+	usage: { text_units: Number, text_characters: Number, features: Number },
 	semantic_roles: [
 		{
 			subject: {

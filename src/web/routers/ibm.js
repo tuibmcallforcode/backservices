@@ -1,12 +1,17 @@
 import { analyze } from "../../controllers/ibm/nlu.js";
-import { translate } from "../../controllers/ibm/translate";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { origin, pdc } from "../../models";
+import { translate } from "../../controllers/ibm/translate.js";
+import { origin, pdc } from "../../models/index.js";
+import { insertRelief, insertPdc } from "../../controllers/crawler";
 
-let testPath = join(__dirname, "../../../testcase/clawler/");
-let testCase = JSON.parse(readFileSync(testPath + "clawler.json"));
-let testCasePdc = JSON.parse(readFileSync(testPath + "pdc.json"));
+
+// // for test
+// import { readFileSync } from "fs";
+// import { join } from "path";
+// let testPath = join(__dirname, "../../../testcase/crawler/");
+// let testCase = JSON.parse(readFileSync(testPath + "relief.json"));
+// let testCasePdc = JSON.parse(readFileSync(testPath + "pdc.json"));
+
+
 async function nluAnalyzeHandler(ctx) {
 	const { text } = ctx.request.body;
 	let analyzed = await analyze(text);
@@ -20,18 +25,31 @@ async function translateHandler(ctx) {
 }
 
 async function clawHandler(ctx) {
-	try{
-	const obj = await origin.create(testCase);
-	ctx.body = Object.assign({}, { message: "success" },obj);
-	}
-	catch(e){
-		console.log(e);
+	try {
+		const { field } = ctx.request.body;
+		const obj = await insertRelief(field);
+		ctx.body = Object.assign({}, { message: "success" }, obj);
+	} catch (e) {
+		ctx.throw(400, e.message);
 	}
 }
 
-async function pdcHandler(ctx) {
-	const obj = await pdc.create(testCasePdc);
-	ctx.body = Object.assign({}, { message: "success" },obj);
+async function clawHandlerTest(ctx) {
+	try {
+		const obj = await insertRelief(testCase);
+		ctx.body = Object.assign({}, { message: "success" }, obj);
+	} catch (e) {
+		ctx.throw(400, e.message);
+	}
+}
+
+async function pdcHandlerTest(ctx) {
+	try {
+		const obj = await insertPdc(testCasePdc);
+		ctx.body = Object.assign({}, { message: "success" }, obj);
+	} catch (e) {
+		ctx.throw(400, e.message);
+	}
 }
 
 const routes = [
@@ -56,16 +74,22 @@ const routes = [
 		}
 	},
 	{
-		method: "get",
+		method: "post",
 		path: "/claw",
 		middlewares: [],
 		handler: clawHandler
 	},
 	{
 		method: "get",
-		path: "/pdc",
+		path: "/claw-test",
 		middlewares: [],
-		handler: pdcHandler
+		handler: clawHandlerTest
+	},
+	{
+		method: "get",
+		path: "/pdc-test",
+		middlewares: [],
+		handler: pdcHandlerTest
 	}
 ];
 

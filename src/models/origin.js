@@ -23,20 +23,18 @@ var originSchema = new Schema({
 			iso3: String,
 			location: { lat: Number, lon: Number }
 		},
-        title: String,
-        body: String,
-        url: String,
-        id: {
-            type: String,
-            unique: true
-        },
+		title: String,
+		body: String,
+		url: String,
+		id: {
+			type: String,
+			unique: true
+		},
 		origin: String,
 		language: [{ id: Number, name: String, code: String }],
 		disaster_type: [{ id: Number, name: String, code: String }]
 	}
 });
-
-
 
 const Origin = mongoose.model("origin", originSchema);
 module.exports = Origin;
