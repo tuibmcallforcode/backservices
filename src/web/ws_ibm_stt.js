@@ -5,12 +5,41 @@ import { NewSpeechToTextModule } from "../controllers/ibm/stt";
 
 const wss = new WebSocket.Server({ noServer: true });
 
+function isJSON(item) {
+	item = typeof item !== "string" ? JSON.stringify(item) : item;
+
+	try {
+		item = JSON.parse(item);
+	} catch (e) {
+		return false;
+	}
+
+	if (typeof item === "object" && item !== null) {
+		return true;
+	}
+
+	return false;
+}
+
 wss.on("connection", async function connection(ws) {
 	let data = null;
-	const sttWS = await NewSpeechToTextModule({}, function onMessage(evt) {
-		console.log(evt);
-	});
+	const sttWS = await NewSpeechToTextModule(
+		{},
+		function onOpen() {
+			ws.send(JSON.stringify({ status: "open" }));
+		},
+		function onMessage(evt) {
+			ws.send(evt);
+		}
+	);
 	ws.on("message", function incoming(message) {
+		// if json , send it directly to server
+		if (isJSON(message)) {
+			console.log("received message", message);
+			sttWS.send(message);
+			return;
+		}
+
 		const totalLength = data ? data.length + message.length : 0;
 		data = data ? Buffer.concat([data, message], totalLength) : message;
 		if (sttWS.readyState == 1) {
@@ -34,7 +63,6 @@ wss.on("connection", async function connection(ws) {
 		readable.on("end", function() {
 			fileWriter.end();
 		});
-		sttWS.send(JSON.stringify({ action: "stop" }));
 	});
 });
 
