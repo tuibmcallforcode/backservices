@@ -1,16 +1,16 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
-var pdcSchema = new Schema({
-	last_Update: Date,
-	hazard_Name: String,
-	snc_url: String,
-	description: String,
-	latitude: Number,
-	longitude: Number,
-	type_ID: String, //TSUNAMI, TORNADO
-	severity_ID: String //INFORMATION, WATCH
+const pdcSchema = new Schema({
+	_id: { type: String, unique: true }, //uuid
+	title: String, //hazard_Name
+	description: String, //description
+	source: String, //snc_url
+	time: String, //update_Date
+	severity: String, //severity_ID
+	latitude: String, //latitude
+	longitude: String //longtitude
 });
 
-const Pdc = mongoose.model("pdc", pdcSchema);
-module.exports = Pdc;
+const PDC = mongoose.model("pdc", pdcSchema);
+module.exports = PDC;

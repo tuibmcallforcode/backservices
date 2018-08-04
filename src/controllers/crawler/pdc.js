@@ -5,9 +5,10 @@ import debug from "debug";
 import XMLExtract from "xml-extract";
 import XMLParser from "xml2json";
 
+import { pdc as PDC } from "../../models";
+
 const app = "callforcode";
-const error = debug(`${app}:error`);
-const log = debug(`${app}:crawler`);
+const log = debug(`${app}:controllers`);
 
 const API_URL = "https://hpxml.pdc.org/public.xml";
 const FILE_PATH = path.join(__dirname, "../..", "data/pdc_data.json");
@@ -30,7 +31,23 @@ const _fetch = ({ url = API_URL }) => {
 	});
 };
 
-exports.fetchPDC = () => {
+const upsertAll = data => {
+	return data.map(datum => {
+		const { _id } = datum;
+		return new Promise((resolve, reject) => {
+			PDC.update(
+				{ _id: _id },
+				datum,
+				{ upsert: true, setDefaultsOnInsert: true },
+				(err, ele) => {
+					if (err) reject(err);
+					else resolve(ele);
+				}
+			);
+		});
+	});
+};
+export function fetchPDC() {
 	return new Promise(async (resolve, reject) => {
 		const alertXmlQuery = {
 			url: API_URL
@@ -39,20 +56,55 @@ exports.fetchPDC = () => {
 		try {
 			const XMLData = await _fetch(alertXmlQuery);
 
-			let dataToWrite = [];
+			let data = [];
 			XMLExtract(XMLData, "hazardBean", true, (err, element) => {
-				if (err) error(err);
+				if (err) log(err);
 				else {
-					let JSONString = XMLParser.toJson(element);
-					let JSONData = JSON.parse(JSONString);
-					dataToWrite.push(JSONData.hazardBean);
+					const JSONString = XMLParser.toJson(element);
+					const JSONData = JSON.parse(JSONString);
+					const {
+						hazardBean: {
+							uuid: _id,
+							hazard_Name: title,
+							latitude,
+							longitude,
+							severity_ID: severity,
+							description,
+							snc_url: source,
+							update_Date: time
+						}
+					} = JSONData;
+
+					const datum = {
+						_id,
+						title,
+						latitude,
+						longitude,
+						severity,
+						description,
+						source,
+						time
+					};
+
+					data.push(datum);
 				}
 			});
 
-			writeToFile({ data: JSON.stringify(dataToWrite) });
+			const promises = upsertAll(data);
+			Promise.all(promises)
+				.then(resolve)
+				.catch(reject);
 		} catch (e) {
-			error(`err: ${e}`);
+			log(`err: ${e}`);
 			reject(e);
 		}
 	});
-};
+}
+
+export function getAllPDCData() {
+	return new Promise((resolve, reject) => {
+		PDC.find({})
+			.then(resolve)
+			.catch(reject);
+	});
+}

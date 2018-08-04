@@ -1,4 +1,6 @@
 import { origin, pdc } from "../../models";
+import { fetchRelieftWeb } from "./reliefWeb";
+import { fetchPDC } from "./pdc";
 
 export async function insertRelief(parameters) {
 	try {
@@ -29,8 +31,6 @@ export async function analyze(text) {
 	const parameters = Object.assign({}, { text }, nluParams);
 	return await analyzeAsync(parameters);
 }
-import { fetchRelieftWeb } from "./reliefWeb";
-import { fetchPDC } from "./pdc";
 // const option = {
 // 	offset: 0,
 // 	query: {
