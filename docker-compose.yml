@@ -16,11 +16,11 @@ services:
       context: .
       dockerfile: ./Dockerfile.dev
     volumes:
-      - .:/usr/src/ibmtucfc
-      - /usr/src/ibmtucfc/node_modules
+      - .:/usr/src/ibmtucfc/
+      - ./node_modules:/usr/src/ibmtucfc/node_modules
     environment:
       - APP_ENV=development
     depends_on:
       - ibmtucfc_mongo
     ports:
-      - 8080:8080
+      - 8080:3000
