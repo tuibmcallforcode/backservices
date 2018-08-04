@@ -1,17 +1,20 @@
-import { getAllPDCData, fetchPDC } from "../../controllers/crawler/pdc";
+import {
+	fetchRelieftWeb,
+	getAllReliefData
+} from "../../controllers/crawler/relief";
 
-async function pdcHandler(ctx) {
+async function reliefHandler(ctx) {
 	try {
-		const data = await getAllPDCData();
+		const data = await getAllReliefData();
 		ctx.body = { data: data };
 	} catch (e) {
 		ctx.throw(400, e.message);
 	}
 }
 
-async function fetchHandler(ctx) {
+async function fetchRelief(ctx) {
 	try {
-		const data = await fetchPDC();
+		const data = await fetchRelieftWeb();
 		ctx.body = { data: data };
 	} catch (e) {
 		ctx.throw(400, e.message);
@@ -23,13 +26,13 @@ const routes = [
 		method: "get",
 		path: "/",
 		middlewares: [],
-		handler: pdcHandler
+		handler: reliefHandler
 	},
 	{
 		method: "get",
 		path: "/fetch",
 		middlewares: [],
-		handler: fetchHandler
+		handler: fetchRelief
 	}
 ];
 

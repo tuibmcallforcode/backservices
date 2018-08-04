@@ -1,14 +1,10 @@
 import request from "request";
 import fs from "fs";
 import path from "path";
-import debug from "debug";
 import XMLExtract from "xml-extract";
 import XMLParser from "xml2json";
-
+import { log } from "./constants";
 import { pdc as PDC } from "../../models";
-
-const app = "callforcode";
-const log = debug(`${app}:controllers`);
 
 const API_URL = "https://hpxml.pdc.org/public.xml";
 const FILE_PATH = path.join(__dirname, "../..", "data/pdc_data.json");
@@ -33,10 +29,10 @@ const _fetch = ({ url = API_URL }) => {
 
 const upsertAll = data => {
 	return data.map(datum => {
-		const { _id } = datum;
+		const { id } = datum;
 		return new Promise((resolve, reject) => {
 			PDC.update(
-				{ _id: _id },
+				{ id },
 				datum,
 				{ upsert: true, setDefaultsOnInsert: true },
 				(err, ele) => {
@@ -47,7 +43,36 @@ const upsertAll = data => {
 		});
 	});
 };
-export function fetchPDC() {
+
+function formatDatumToModel(JSONData) {
+	const {
+		hazardBean: {
+			uuid: id,
+			hazard_Name: title,
+			latitude,
+			longitude,
+			severity_ID: severity,
+			description,
+			snc_url: source,
+			update_Date: time
+		}
+	} = JSONData;
+
+	const datum = {
+		id,
+		title,
+		latitude,
+		longitude,
+		severity,
+		description,
+		source,
+		time
+	};
+
+	return datum;
+}
+
+function getPDCAlert() {
 	return new Promise(async (resolve, reject) => {
 		const alertXmlQuery = {
 			url: API_URL
@@ -57,47 +82,33 @@ export function fetchPDC() {
 			const XMLData = await _fetch(alertXmlQuery);
 
 			let data = [];
-			XMLExtract(XMLData, "hazardBean", true, (err, element) => {
+			XMLExtract(XMLData, "hazardBean", true, async (err, element) => {
 				if (err) log(err);
 				else {
 					const JSONString = XMLParser.toJson(element);
 					const JSONData = JSON.parse(JSONString);
-					const {
-						hazardBean: {
-							uuid: _id,
-							hazard_Name: title,
-							latitude,
-							longitude,
-							severity_ID: severity,
-							description,
-							snc_url: source,
-							update_Date: time
-						}
-					} = JSONData;
-
-					const datum = {
-						_id,
-						title,
-						latitude,
-						longitude,
-						severity,
-						description,
-						source,
-						time
-					};
+					const datum = await formatDatumToModel(JSONData);
 
 					data.push(datum);
 				}
 			});
 
-			const promises = upsertAll(data);
-			Promise.all(promises)
-				.then(resolve)
-				.catch(reject);
+			resolve(data);
 		} catch (e) {
 			log(`err: ${e}`);
 			reject(e);
 		}
+	});
+}
+
+export async function fetchPDC() {
+	return new Promise(async (resolve, reject) => {
+		const data = await getPDCAlert();
+
+		const promises = upsertAll(data);
+		Promise.all(promises)
+			.then(resolve)
+			.catch(reject);
 	});
 }
 

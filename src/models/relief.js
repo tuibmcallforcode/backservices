@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const pdcSchema = new Schema({
+const reliefSchema = new Schema({
 	id: String,
 	title: String, //hazard_Name
 	description: String, //description
@@ -9,8 +9,9 @@ const pdcSchema = new Schema({
 	time: String, //update_Date
 	severity: String, //severity_ID
 	latitude: String, //latitude
-	longitude: String //longtitude
+	longitude: String, //longtitude
+	body: String
 });
 
-const PDC = mongoose.model("pdc", pdcSchema);
-module.exports = PDC;
+const relief = mongoose.model("relief", reliefSchema);
+module.exports = relief;
