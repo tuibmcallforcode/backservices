@@ -56,7 +56,7 @@ function formatDatumToModel(JSONData) {
 		fields: {
 			name: title,
 			primary_country: {
-				location: { lat: latitude, long: longitude }
+				location: { lat: latitude, lon: longitude }
 			},
 			type,
 			description,
