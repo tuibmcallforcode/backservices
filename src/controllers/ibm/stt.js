@@ -8,7 +8,6 @@ if (
 import WebSocket from "ws";
 import debugSTT from "debug";
 import axios from "axios";
-import { throws } from "assert";
 
 const AUTH_URL = "https://stream.watsonplatform.net/authorization/api/v1/token";
 const URL_PARAMS = "https://stream.watsonplatform.net/speech-to-text/api";
@@ -39,17 +38,14 @@ const debug = debugSTT("callforcode:speech_to_text"),
 		"wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize" +
 		"?watson-token={{token}}";
 
-export async function NewSpeechToTextModule(params, _onMessage) {
+export async function NewSpeechToTextModule(params, _onOpen, _onMessage) {
 	const token = await getAuthToken();
 	const requestURI = wsURI.replace("{{token}}", token);
 	const ws = new WebSocket(requestURI);
+
 	ws.on("open", function open() {
-		var message = {
-			action: "start",
-			"content-type": "audio/l16;rate=44100"
-		};
-		debug("send action 'start' to ibm");
-		ws.send(JSON.stringify(message));
+		debug("ibm socket opened");
+		_onOpen();
 	});
 
 	ws.on("message", function onMessage(evt) {

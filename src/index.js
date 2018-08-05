@@ -1,6 +1,7 @@
 import "../env";
 
 import { serve, shutdown } from "./web";
+import { closeConnection } from "./db/mongo";
 import debugMain from "debug";
 import mongoose from "mongoose";
 
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000,
 		);
 		try {
 			await shutdown();
+			await closeConnection();
 		} catch (e) {
 			console.error("shutdown: ", e);
 		}

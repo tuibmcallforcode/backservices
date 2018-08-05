@@ -1,10 +1,9 @@
 FROM node:carbon
 
-RUN npm i nodemon -g
 
-WORKDIR /usr/src/ibmtucfc
+WORKDIR /usr/src/ibmtucfc/
 
 # If you are building your code for production
 # RUN npm install --only=production
 
-CMD npm run dev
+CMD yarn run dev
