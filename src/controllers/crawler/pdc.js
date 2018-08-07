@@ -12,7 +12,7 @@ const log = debug(`${app}:crawler`);
 const API_URL = "https://hpxml.pdc.org/public.xml";
 const FILE_PATH = path.join(__dirname, "../..", "data/pdc_data.json");
 
-const writeToFile = ({ filePath = FILE_PATH, data = "", flag = "w" }) => {
+const writeToFileAsync = ({ filePath = FILE_PATH, data = "", flag = "w" }) => {
 	return new Promise((resolve, reject) => {
 		fs.writeFile(filePath, data, { flag: flag }, err => {
 			if (err) reject(err);
@@ -30,7 +30,7 @@ const _fetch = ({ url = API_URL }) => {
 	});
 };
 
-exports.fetchPDC = () => {
+export function fetchPDC() {
 	return new Promise(async (resolve, reject) => {
 		const alertXmlQuery = {
 			url: API_URL
@@ -49,10 +49,10 @@ exports.fetchPDC = () => {
 				}
 			});
 
-			writeToFile({ data: JSON.stringify(dataToWrite) });
+			writeToFileAsync({ data: JSON.stringify(dataToWrite) });
 		} catch (e) {
 			error(`err: ${e}`);
 			reject(e);
 		}
 	});
-};
+}

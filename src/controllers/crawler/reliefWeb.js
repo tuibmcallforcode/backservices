@@ -10,7 +10,7 @@ const log = debug(`${app}:crawler`);
 const API_URL = "https://api.reliefweb.int/v1/reports";
 const FILE_PATH = path.join(__dirname, "../..", "data/relief_data.json");
 
-const writeToFile = ({ filePath = FILE_PATH, data = "", flag = "w" }) => {
+const writeToFileAsync = ({ filePath = FILE_PATH, data = "", flag = "w" }) => {
 	return new Promise((resolve, reject) => {
 		fs.writeFile(filePath, data, { flag: flag }, err => {
 			if (err) reject(err);
@@ -67,7 +67,7 @@ exports.fetchRelieftWeb = (options = null) => {
 				if (length - 1 === i) {
 					log(`data length ${dataToWrite.length}`);
 
-					await writeToFile({ data: JSON.stringify(dataToWrite) });
+					await writeToFileAsync({ data: JSON.stringify(dataToWrite) });
 					resolve("write file finished.");
 				}
 			});
