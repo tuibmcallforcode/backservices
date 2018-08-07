@@ -1,6 +1,3 @@
-import { analyze } from "../../controllers/ibm/nlu.js";
-import { translate } from "../../controllers/ibm/translate.js";
-import { origin, pdc } from "../../models/index.js";
 import { insertRelief, insertPdc } from "../../controllers/crawler";
 
 // // for test
@@ -9,18 +6,6 @@ import { insertRelief, insertPdc } from "../../controllers/crawler";
 // let testPath = join(__dirname, "../../../testcase/crawler/");
 // let testCase = JSON.parse(readFileSync(testPath + "relief.json"));
 // let testCasePdc = JSON.parse(readFileSync(testPath + "pdc.json"));
-
-async function nluAnalyzeHandler(ctx) {
-	const { text } = ctx.request.body;
-	let analyzed = await analyze(text);
-	ctx.body = analyzed;
-}
-
-async function translateHandler(ctx) {
-	const { text, target, source } = ctx.request.body;
-	let translated = await translate({ text, target, source });
-	ctx.body = translated;
-}
 
 async function clawHandler(ctx) {
 	try {
@@ -53,25 +38,13 @@ async function pdcHandlerTest(ctx) {
 const routes = [
 	{
 		method: "post",
-		path: "/nlu/analyze",
-		middlewares: [],
-		handler: nluAnalyzeHandler
-	},
-	{
-		method: "post",
-		path: "/translate",
-		middlewares: [],
-		handler: translateHandler
-	},
-	{
-		method: "post",
-		path: "/claw",
+		path: "/",
 		middlewares: [],
 		handler: clawHandler
 	},
 	{
 		method: "get",
-		path: "/claw-test",
+		path: "/test",
 		middlewares: [],
 		handler: clawHandlerTest
 	},
