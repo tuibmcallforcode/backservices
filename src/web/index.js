@@ -7,6 +7,7 @@ import logger from "koa-logger";
 import bodyParser from "koa-bodyparser";
 
 import sttIBMWebSocket from "./ws_ibm_stt";
+import winstonLogger from "../logger";
 
 const app = new Koa(),
 	debug = debugWeb("callforcode:webserver");
@@ -14,11 +15,11 @@ const app = new Koa(),
 let server;
 
 export function serve({ port }) {
-	debug("serve options %o", arguments);
+	winstonLogger.debug("serve options, %O", arguments);
 
 	app.use(
 		logger(str => {
-			debug(str);
+			winstonLogger.info(str);
 		})
 	);
 	app.use(bodyParser());
@@ -38,7 +39,7 @@ export function serve({ port }) {
 			socket.destroy();
 		}
 	});
-	console.log(`server is listening to ${port}`);
+	winstonLogger.info(`server is listening to ${port}`);
 }
 
 export function shutdown() {

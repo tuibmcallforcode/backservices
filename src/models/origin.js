@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
-var originSchema = new Schema({
+const originSchema = new Schema({
 	fields: {
 		date: {
 			original: Date,
@@ -36,5 +36,5 @@ var originSchema = new Schema({
 	}
 });
 
-const Origin = mongoose.model("origin", originSchema);
-module.exports = Origin;
+let Origin = mongoose.model("origin", originSchema);
+export default Origin;

@@ -3,10 +3,11 @@ if (
 	(!process.env.TLE_USERNAME && !process.env.TLE_PASSWORD)
 ) {
 	console.error("env for translate not found");
-	process.exit(400);
+	process.exit(1);
 }
 
 import LanguageTranslatorV3 from "watson-developer-cloud/language-translator/v3";
+import logger from "../../logger";
 
 const VERSION = "2018-05-01";
 
@@ -36,5 +37,7 @@ function translateAsync(parameters) {
 
 export async function translate({ text, source, target }) {
 	const parameters = { text, source, target };
+	logger.debug("translating %s, params %O", textDebug, nluParams);
+
 	return await translateAsync(parameters);
 }

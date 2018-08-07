@@ -3,11 +3,11 @@ if (
 	(!process.env.NLU_USERNAME && !process.env.NLU_PASSWORD)
 ) {
 	console.error("env for nlu not found");
-	process.exit(400);
+	process.exit(1);
 }
 
 import NaturalLanguageUnderstandingV1 from "watson-developer-cloud/natural-language-understanding/v1";
-
+import logger from "../../logger";
 const VERSION = "2018-03-16";
 
 const nluParams = {
@@ -41,6 +41,8 @@ function analyzeAsync(parameters) {
 }
 
 export async function analyze(text) {
+	textDebug = text.match(/[\s\S]{1,20}/g) || [];
+	logger.debug("analying %s, params %O", textDebug, nluParams);
 	const parameters = Object.assign({}, { text }, nluParams);
 	return await analyzeAsync(parameters);
 }
