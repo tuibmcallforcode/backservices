@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+import mongoose from "mongoose";
 var Schema = mongoose.Schema;
 
 var pdcSchema = new Schema({
@@ -12,5 +12,5 @@ var pdcSchema = new Schema({
 	severity_ID: String //INFORMATION, WATCH
 });
 
-const Pdc = mongoose.model("pdc", pdcSchema);
-module.exports = Pdc;
+const PDC = mongoose.model("pdc", pdcSchema);
+export let model = PDC;
