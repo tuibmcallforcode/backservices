@@ -1,13 +1,10 @@
 import request from "request";
 import fs from "fs";
 import path from "path";
-import debug from "debug";
 import XMLExtract from "xml-extract";
 import XMLParser from "xml2json";
-
-const app = "callforcode";
-const error = debug(`${app}:error`);
-const log = debug(`${app}:crawler`);
+import { log } from "./constants";
+import { pdc as PDC } from "../../models";
 
 const API_URL = "https://hpxml.pdc.org/public.xml";
 const FILE_PATH = path.join(__dirname, "../..", "data/pdc_data.json");
@@ -30,7 +27,52 @@ const _fetch = ({ url = API_URL }) => {
 	});
 };
 
-export function fetchPDC() {
+const upsertAll = data => {
+	return data.map(datum => {
+		const { id } = datum;
+		return new Promise((resolve, reject) => {
+			PDC.update(
+				{ id },
+				datum,
+				{ upsert: true, setDefaultsOnInsert: true },
+				(err, ele) => {
+					if (err) reject(err);
+					else resolve(ele);
+				}
+			);
+		});
+	});
+};
+
+function formatDatumToModel(JSONData) {
+	const {
+		hazardBean: {
+			uuid: id,
+			hazard_Name: title,
+			latitude,
+			longitude,
+			severity_ID: severity,
+			description,
+			snc_url: source,
+			update_Date: time
+		}
+	} = JSONData;
+
+	const datum = {
+		id,
+		title,
+		latitude,
+		longitude,
+		severity,
+		description,
+		source,
+		time
+	};
+
+	return datum;
+}
+
+function getPDCAlert() {
 	return new Promise(async (resolve, reject) => {
 		const alertXmlQuery = {
 			url: API_URL
@@ -39,20 +81,41 @@ export function fetchPDC() {
 		try {
 			const XMLData = await _fetch(alertXmlQuery);
 
-			let dataToWrite = [];
-			XMLExtract(XMLData, "hazardBean", true, (err, element) => {
-				if (err) error(err);
+			let data = [];
+			XMLExtract(XMLData, "hazardBean", true, async (err, element) => {
+				if (err) log(err);
 				else {
-					let JSONString = XMLParser.toJson(element);
-					let JSONData = JSON.parse(JSONString);
-					dataToWrite.push(JSONData.hazardBean);
+					const JSONString = XMLParser.toJson(element);
+					const JSONData = JSON.parse(JSONString);
+					const datum = await formatDatumToModel(JSONData);
+
+					data.push(datum);
 				}
 			});
 
-			writeToFileAsync({ data: JSON.stringify(dataToWrite) });
+			resolve(data);
 		} catch (e) {
-			error(`err: ${e}`);
+			log(`err: ${e}`);
 			reject(e);
 		}
+	});
+}
+
+export async function fetchPDC() {
+	return new Promise(async (resolve, reject) => {
+		const data = await getPDCAlert();
+
+		const promises = upsertAll(data);
+		Promise.all(promises)
+			.then(resolve)
+			.catch(reject);
+	});
+}
+
+export function getAllPDCData() {
+	return new Promise((resolve, reject) => {
+		PDC.find({})
+			.then(resolve)
+			.catch(reject);
 	});
 }
