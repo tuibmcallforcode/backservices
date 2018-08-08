@@ -10,10 +10,7 @@ module.exports = function(api) {
 			}
 		]
 	];
-	const plugins = [
-		"dynamic-import-node-babel-7",
-		"@babel/plugin-proposal-object-rest-spread"
-	];
+	const plugins = ["dynamic-import-node-babel-7"];
 	const env = {
 		test: {
 			presets: [
