@@ -1,15 +1,21 @@
-import http from 'http';
-import assert from 'assert';
+import path from "path";
+const dotenvPath = path.resolve(".env");
+require("dotenv").config({ path: dotenvPath });
 
-import '../index.js';
+function importTest(name, path) {
+	describe(name, function() {
+		require(path);
+	});
+}
 
-const port = process.env.PORT || 3000;
+// var common = require("./common");
 
-describe('Example Node Server', () => {
-  it('should return 200', done => {
-    http.get(`http://127.0.0.1:${port}`, res => {
-      assert.equal(200, res.statusCode);
-      done();
-    });
-  });
+describe("top", function() {
+	beforeEach(function() {
+		console.log("running something before each test");
+	});
+	importTest("model:reliefweb_raw", "./models/reliefweb_raw");
+	after(function() {
+		console.log("after all tests");
+	});
 });
