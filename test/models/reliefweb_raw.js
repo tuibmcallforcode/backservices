@@ -1,14 +1,15 @@
 import {
 	_fetchRawReports,
-	_fetchReportsContent,
+	_fetchReportsContentFromReportURLList,
 	fetchRawReliefWeb,
+	_mapContentToMongooseModel,
 	QUERY_EARTHQUAKE
 } from "../../src/models/reliefweb_raw";
 import assert from "assert";
 
-describe("Request reliefweb", () => {
+describe("Request reliefweb", function() {
+	this.timeout(50000);
 	it("should runs _fetchRawReports fine", async function() {
-		this.timeout(50000);
 		const data = await _fetchRawReports({
 			offset: 0,
 			query: "earthquake"
@@ -17,21 +18,26 @@ describe("Request reliefweb", () => {
 	});
 
 	it("should runs _fetchReportsContent fine", async function() {
-		this.timeout(50000);
-		const result = await _fetchReportsContent({
-			reportURLList: [
-				"https://api.reliefweb.int/v1/reports/2662779",
-				"https://api.reliefweb.int/v1/reports/2685334"
-			]
+		const results = await _fetchReportsContentFromReportURLList([
+			"https://api.reliefweb.int/v1/reports/2662779",
+			"https://api.reliefweb.int/v1/reports/2685334"
+		]);
+		assert.equal(results.length, 2);
+	});
+	it.only("test data", async function() {
+		const data = await _fetchRawReports({
+			offset: 0
+			// query: "earthquake"
 		});
-		assert.equal(result.length, 2);
+		const content = await _fetchReportsContentFromReportURLList([data[0].href]);
+		_mapContentToMongooseModel(data[0], content);
 	});
 	it("should runs fetchRawReliefWeb fine", async function() {
-		this.timeout(50000);
-		const result = await fetchRawReliefWeb({
-			offset: 0,
-			query: QUERY_EARTHQUAKE
+		const results = await fetchRawReliefWeb({
+			offset: 0
+			// query: QUERY_EARTHQUAKE
 		});
-		assert.equal(result.length, process.env.RELIEF_REQ_LIM || 100);
+		console.log(results[0]);
+		assert.equal(results.length, process.env.RELIEF_REQ_LIM || 100);
 	});
 });

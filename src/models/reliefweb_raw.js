@@ -1,50 +1,29 @@
 import mongoose from "mongoose";
 import rp from "request-promise-native";
+import qs from "querystring";
+
 import parallelLimit from "async/parallelLimit";
 import logger from "../logger";
 
 const Schema = mongoose.Schema;
 
 const reliefwebRawSchema = new Schema({
-	fields: {
-		date: {
-			original: Date,
-			changed: Date,
-			created: Date
-		},
-		country: [
-			{
-				name: String,
-				shortname: String,
-				iso3: String,
-				location: { latด: Number, lon: Number },
-				primary: Boolean
-			}
-		],
-		primary_country: {
-			name: String,
-			shortname: String,
-			iso3: String,
-			location: { lat: Number, lon: Number }
-		},
-		title: String,
-		body: String,
-		url: String,
-		id: {
-			type: String,
-			unique: true
-		},
-		origin: String,
-		language: [{ id: Number, name: String, code: String }],
-		disaster_type: [{ id: Number, name: String, code: String }]
-	}
+	_id: Number,
+	title: String, //hazard_Name
+	description: String, //description
+	source: String, //snc_url
+	time: String, //update_Date
+	severity: String, //severity_ID
+	latitude: String, //latitude
+	longitude: String, //longtitude
+	body: String
 });
 
 let ReliefwebRaw = mongoose.model("reliefweb_raw", reliefwebRawSchema);
 export let model = ReliefwebRaw;
 
 // utility const for reliefweb
-const API_URL = "https://api.reliefweb.int/v1/reports";
+const API_URL = "https://api.reliefweb.int/v1/disasters";
 export const QUERY_EARTHQUAKE = "earthquake";
 
 export async function fetchRawReliefWeb({ offset, query }) {
@@ -67,16 +46,11 @@ export async function fetchRawReliefWeb({ offset, query }) {
 		logger.error("_fetchReportsContent", e);
 		return;
 	}
-	let resultList = [];
-	reportList.forEach((report, index) => {
-		const contentData = reportContentList[index].data
-			? reportContentList[index].data[0].fields
-			: {};
-		resultList.push({
-			...report.fields,
-			...contentData
-		});
-	});
+
+	let resultList = reportList.map((report, index) =>
+		_mapResultToMongooseModel(report, reportContentList[index])
+	);
+
 	return resultList;
 }
 
@@ -92,24 +66,26 @@ export async function fetchRawReliefWeb({ offset, query }) {
 export async function _fetchRawReports({ offset, query }) {
 	const reportRequestParams = {
 		offset,
-		query: {
-			value: query
-		},
+		query: query
+			? {
+					value: query
+			  }
+			: null,
 		profile: "list",
 		limit: offset + (Number(process.env.RELIEF_REQ_LIM) || 100),
 		sort: ["date:desc"]
 	};
 	logger.debug("_fetchRawReports request params", reportRequestParams);
-
 	const { data } = await rp.post(API_URL, {
 		body: reportRequestParams,
+		qs: { appname: process.env.RELIEF_APPNAME || null },
 		json: true
 	});
 
 	return data;
 }
 
-export function _fetchReportsContent({ reportURLList = [] }) {
+export function _fetchReportsContentFromReportURLList(reportURLList = []) {
 	if (!Array.isArray(reportURLList) && reportURLList.length === 0) {
 		logger.warn("invalid params", reportURLList);
 		return;
@@ -117,7 +93,8 @@ export function _fetchReportsContent({ reportURLList = [] }) {
 	const parallelFuncsList = reportURLList.map(reportURL => {
 		return function(callback) {
 			rp(reportURL, {
-				json: true
+				json: true,
+				appname: process.env.RELIEF_APPNAME || null
 			})
 				.then(reportDetail => {
 					callback(null, reportDetail);
@@ -142,4 +119,40 @@ export function _fetchReportsContent({ reportURLList = [] }) {
 			return resolve(reportDetailList);
 		});
 	});
+}
+
+export function _mapContentToMongooseModel(report, data) {
+	report.fields = Object.assign(report.fields, data.fields);
+	console.log("%o", report);
+	console.log("------------------");
+
+	const {
+		id,
+		fields: {
+			name: title,
+			primary_country: {
+				location: { lat: latitude, lon: longitude }
+			},
+			type,
+			description,
+			url: source,
+			date: { created: time }
+		}
+	} = report;
+	const { name: severity } = type[0];
+	const body = description;
+
+	const datum = {
+		id,
+		title,
+		latitude,
+		longitude,
+		severity,
+		description,
+		source,
+		time,
+		body
+	};
+	console.log(datum);
+	return;
 }
