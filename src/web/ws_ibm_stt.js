@@ -1,6 +1,7 @@
 import WebSocket from "ws";
 import wav from "wav";
 import { Readable } from "stream";
+import logger from "../logger";
 import { NewSpeechToTextModule } from "../controllers/ibm/stt";
 
 const wss = new WebSocket.Server({ noServer: true });
@@ -23,19 +24,29 @@ function isJSON(item) {
 
 wss.on("connection", async function connection(ws) {
 	let data = null;
-	const sttWS = await NewSpeechToTextModule(
-		{},
-		function onOpen() {
-			ws.send(JSON.stringify({ status: "open" }));
-		},
-		function onMessage(evt) {
-			ws.send(evt);
-		}
-	);
+	let sttWS;
+	try {
+		sttWS = await NewSpeechToTextModule(
+			{},
+			function onOpen() {
+				ws.send(JSON.stringify({ status: "open" }));
+			},
+			function onMessage(evt) {
+				ws.send(evt);
+			}
+		);
+	} catch (e) {
+		logger.error(e);
+		return;
+	}
 	ws.on("message", function incoming(message) {
+		if (!sttWs) {
+			logger.error("unable to connect to ibm sst socket");
+			return;
+		}
 		// if json , send it directly to server
 		if (isJSON(message)) {
-			console.log("received message", message);
+			logger.debug("received message", message);
 			sttWS.send(message);
 			return;
 		}

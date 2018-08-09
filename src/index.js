@@ -1,26 +1,21 @@
 import "../env";
 
 import { serve, shutdown } from "./web";
-import { closeConnection } from "./db/mongo";
-import debugMain from "debug";
-
-const port = process.env.PORT || 3000,
-	debug = debugMain("callforcode:main");
+import logger from "./logger";
+const port = process.env.PORT || 3000;
 
 // graceful shutdown
 ["SIGINT", "SIGTERM", "SIGQUIT", "SIGUSR2"].forEach(signal =>
 	process.on(signal, async () => {
-		debug(
-			"receive termination signal, shutting down ",
-			Date().toLocaleUpperCase()
-		);
+		logger.info("receive termination signal, shutting down");
 		try {
 			await shutdown();
-			await closeConnection();
+			logger.debug("close webserver success");
 		} catch (e) {
-			console.error("shutdown: ", e);
+			logger.error("shutdown: ", e);
+			process.exit(1);
 		}
-		process.exit();
+		process.exit(0);
 	})
 );
 

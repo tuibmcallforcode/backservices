@@ -1,5 +1,5 @@
 import { analyze } from "../../controllers/ibm/nlu.js";
-import { translate } from "../../controllers/ibm/translate";
+import { translate } from "../../controllers/ibm/translate.js";
 
 async function nluAnalyzeHandler(ctx) {
 	const { text } = ctx.request.body;
@@ -12,7 +12,6 @@ async function translateHandler(ctx) {
 	let translated = await translate({ text, target, source });
 	ctx.body = translated;
 }
-
 const routes = [
 	{
 		method: "post",
@@ -25,14 +24,6 @@ const routes = [
 		path: "/translate",
 		middlewares: [],
 		handler: translateHandler
-	},
-	{
-		method: "get",
-		path: "/",
-		middlewares: [],
-		handler: ctx => {
-			ctx.body = { r: "hello from ibm" };
-		}
 	}
 ];
 
