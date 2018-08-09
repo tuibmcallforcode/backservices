@@ -1,154 +1,55 @@
-import request from "request";
-import fs from "fs";
-import path from "path";
-import { log } from "./constants";
-import { relief as Relief } from "../../models";
+import { Readable } from "stream";
 
-const FILE_PATH = path.join(__dirname, "../..", "data/relief_data.json");
+import { reliefweb_raw } from "../../models";
+import logger from "../../logger";
 
-const writeToFile = ({ filePath = FILE_PATH, data = "", flag = "w" }) => {
-	return new Promise((resolve, reject) => {
-		fs.writeFile(filePath, data, { flag: flag }, err => {
-			if (err) reject(err);
-			else resolve();
-		});
-	});
-};
+export async function crawlToStream({ offset = 0, query }) {
+	const reliefWebRawModelObjects = await reliefweb_raw.fetchRawReliefWeb(
+		{ offset, query },
+		{}
+	);
+	const s = new Readable();
+	s._read = () => {}; // redundant? see update below
+	s.push(JSON.stringify(reliefWebRawModelObjects));
+	s.push(null);
+	return s;
+}
 
-const _fetch = ({ url = API_URL, method = "GET", body = {} }) => {
-	return new Promise((resolve, reject) => {
-		request(
-			url,
-			{
-				method: method,
-				body: JSON.stringify(body)
-			},
-			(err, res, body) => {
-				if (!err) resolve(JSON.parse(body));
-				else reject(err);
-			}
+export async function crawlToDB({ offset = 0, query }) {
+	let result = {};
+	const reliefwebModels = await reliefweb_raw.fetchRawReliefWeb(
+		{ offset, query },
+		{ mongoose: true }
+	);
+	result.data = reliefwebModels;
+	try {
+		result.upserted = await Promise.all(
+			reliefwebModels.map(async model => {
+				const { relief_id } = model;
+				const updateResult = await reliefweb_raw.model.update(
+					{ relief_id },
+					model,
+					{
+						upsert: true,
+						setDefaultsOnInsert: true
+					}
+				);
+				return updateResult;
+			})
 		);
-	});
-};
-
-function upsertAll(data) {
-	// log(`data: ${JSON.stringify(data[0])}`);
-	return data.map(datum => {
-		const { id } = datum;
-		return new Promise((resolve, reject) => {
-			Relief.update(
-				{ id },
-				datum,
-				{ upsert: true, setDefaultsOnInsert: true },
-				(err, ele) => {
-					if (err) reject(err);
-					else resolve(ele);
-				}
-			);
+		return result;
+	} catch (e) {
+		logger.error({
+			error: e
 		});
-	});
+		result.error = e;
+		return result;
+	}
 }
 
-function formatDatumToModel(JSONData) {
-	// console.log(`json ${JSON.stringify(JSONData)}`);
-	const {
-		id,
-		fields: {
-			name: title,
-			primary_country: {
-				location: { lat: latitude, lon: longitude }
-			},
-			type,
-			description,
-			url: source,
-			date: { created: time }
-		}
-	} = JSONData;
-	const { name: severity } = type[0];
-	const body = description;
-
-	const datum = {
-		id,
-		title,
-		latitude,
-		longitude,
-		severity,
-		description,
-		source,
-		time,
-		body
-	};
-
-	return datum;
-}
-
-function getDisastersReport() {
-	return new Promise(async (resolve, reject) => {
-		const API_URL =
-			"https://api.reliefweb.int/v1/disasters?appname=tuibmcfc&limit=10&sort[]=date:desc";
-
-		const query = {
-			url: API_URL,
-			method: "GET"
-		};
-
-		try {
-			const disasters = await _fetch(query);
-			let { data } = disasters;
-			const length = data.length;
-
-			data = await Promise.all(
-				data.map((datum, i) => {
-					return new Promise(async (resolve, reject) => {
-						while (true) {
-							try {
-								const { href } = datum;
-								const datumDetails = await _fetch({ url: href });
-								datum.fields = Object.assign(datum.fields, datumDetails.data[0].fields);
-								resolve(datum);
-								break;
-							} catch (err) {
-								log(`err ${err}, ${JSON.stringify(datum)}`);
-							}
-						}
-					});
-				})
-			);
-			resolve(data);
-		} catch (e) {
-			log(`err: ${e}`);
-			reject(e);
-		}
-	});
-}
-
-export async function fetchRelieftWeb() {
-	return new Promise(async (resolve, reject) => {
-		try {
-			let disasters = await getDisastersReport();
-			disasters = await Promise.all(
-				disasters.map(datum => {
-					return new Promise((resolve, reject) => {
-						try {
-							resolve(formatDatumToModel(datum));
-						} catch (err) {
-							log(`err ${err}`);
-							reject(err);
-						}
-					});
-				})
-			);
-			resolve(await upsertAll(disasters));
-		} catch (err) {
-			log(`err ${err}`);
-			reject(err);
-		}
-	});
-}
-
-export function getAllReliefData() {
+export function getAllPDCData() {
 	return new Promise((resolve, reject) => {
-		Relief.find({})
+		PDC.find({})
 			.then(resolve)
 			.catch(reject);
 	});

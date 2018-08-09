@@ -1,26 +1,33 @@
-import { getPosts, getCards } from "../../controllers/app/post.js";
+import { getAll as getAllPDC } from "../../controllers/app/pdc.js";
+import { getAll as getAllReliefRaw } from "../../controllers/app/relief";
 
-const TYPE_CARD = "card";
-
-async function getPostsHandler(ctx) {
-	const { type } = ctx.request.query;
-
-	switch (type) {
-		case TYPE_CARD:
-			let cardResults = await getCards({});
-			ctx.body = cardResults;
-			break;
-		default:
-			ctx.throw(400, "not found");
+async function getPDCHandler(ctx) {
+	try {
+		ctx.body = await getAllPDC({});
+	} catch (e) {
+		ctx.throw(400, e.stack || e);
+	}
+}
+async function getReliefRawHandler(ctx) {
+	try {
+		ctx.body = await getAllReliefRaw({});
+	} catch (e) {
+		ctx.throw(400, e.stack || e);
 	}
 }
 
 const routes = [
 	{
 		method: "get",
-		path: "/posts",
+		path: "/pdcs",
 		middlewares: [],
-		handler: getPostsHandler
+		handler: getPDCHandler
+	},
+	{
+		method: "get",
+		path: "/relief_raws",
+		middlewares: [],
+		handler: getReliefRawHandler
 	}
 ];
 

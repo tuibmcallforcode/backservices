@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import rp from "request-promise-native";
 import { parseString } from "xml2js";
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const pdcSchema = new Schema({
 	pdc_id: String,
@@ -20,14 +20,16 @@ export let model = PDC;
 
 const API_URL = "https://hpxml.pdc.org/public.xml";
 
-export async function fetchPDC() {
+export async function fetchPDC({ mongoose = false }) {
 	const XMLDataString = await rp(API_URL);
 	const XMLDatas = await _parsePDCXML(XMLDataString);
 
-	const resultList = XMLDatas.map(XMLData => {
-		return _mapPDCToMongooseModel(XMLData);
+	let resultList = XMLDatas.map(XMLData => {
+		return _mapPDCToModel(XMLData);
 	});
-	console.log(resultList);
+	if (mongoose) {
+		resultList = resultList.map(result => new PDC(result));
+	}
 	return resultList;
 }
 
@@ -45,7 +47,7 @@ export function _parsePDCXML(xmlString) {
 	});
 }
 
-export function _mapPDCToMongooseModel(pdcData) {
+export function _mapPDCToModel(pdcData) {
 	const {
 		uuid: pdc_id,
 		hazard_Name: title,
@@ -57,7 +59,7 @@ export function _mapPDCToMongooseModel(pdcData) {
 		update_Date: time
 	} = pdcData;
 
-	return new PDC({
+	return {
 		pdc_id,
 		title,
 		latitude,
@@ -66,5 +68,5 @@ export function _mapPDCToMongooseModel(pdcData) {
 		description,
 		source,
 		time
-	});
+	};
 }

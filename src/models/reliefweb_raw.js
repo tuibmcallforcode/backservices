@@ -8,7 +8,7 @@ import logger from "../logger";
 const Schema = mongoose.Schema;
 
 const reliefwebRawSchema = new Schema({
-	_id: Number,
+	relief_id: Number,
 	title: String, //hazard_Name
 	description: String, //description
 	source: String, //snc_url
@@ -24,9 +24,11 @@ export let model = ReliefwebRaw;
 
 // utility const for reliefweb
 const API_URL = "https://api.reliefweb.int/v1/disasters";
-export const QUERY_EARTHQUAKE = "earthquake";
 
-export async function fetchRawReliefWeb({ offset, query }) {
+export async function fetchRawReliefWeb(
+	{ offset, query },
+	{ mongoose = false }
+) {
 	let reportList;
 	try {
 		reportList = await _fetchRawReports({ offset: offset, query });
@@ -41,16 +43,19 @@ export async function fetchRawReliefWeb({ offset, query }) {
 	});
 	let reportContentList;
 	try {
-		reportContentList = await _fetchReportsContent({ reportURLList });
+		reportContentList = await _fetchReportsContentFromReportURLList(
+			reportURLList
+		);
 	} catch (e) {
 		logger.error("_fetchReportsContent", e);
 		return;
 	}
 
-	let resultList = reportList.map((report, index) =>
-		_mapResultToMongooseModel(report, reportContentList[index])
-	);
+	let resultList = reportContentList.map(_mapContentToModel);
 
+	if (mongoose) {
+		return resultList.map(result => new ReliefwebRaw(result));
+	}
 	return resultList;
 }
 
@@ -96,8 +101,8 @@ export function _fetchReportsContentFromReportURLList(reportURLList = []) {
 				json: true,
 				appname: process.env.RELIEF_APPNAME || null
 			})
-				.then(reportDetail => {
-					callback(null, reportDetail);
+				.then(({ data }) => {
+					callback(null, data[0]);
 				})
 				.catch(e => {
 					// dont throw if single url cannot retrive
@@ -121,20 +126,9 @@ export function _fetchReportsContentFromReportURLList(reportURLList = []) {
 	});
 }
 
-export function _mapContentToMongooseModel(report, data) {
-	// console.log("----------report.fields--------");
-	// console.log("%o", report.fields);
-	// console.log("------------------");
-	// console.log("----------data.fields--------");
-	// console.log("%o", data.fields);
-	// console.log("------------------");
-	report.fields = Object.assign(report.fields, data.fields);
-	console.log("----------report--------");
-	console.log("%o", report);
-	console.log("------------------");
-
+export function _mapContentToModel(data) {
 	const {
-		id,
+		id: relief_id,
 		fields: {
 			name: title,
 			primary_country: {
@@ -145,12 +139,12 @@ export function _mapContentToMongooseModel(report, data) {
 			url: source,
 			date: { created: time }
 		}
-	} = report;
+	} = data;
 	const { name: severity } = type[0];
 	const body = description;
 
 	const datum = {
-		id,
+		relief_id,
 		title,
 		latitude,
 		longitude,
@@ -160,6 +154,5 @@ export function _mapContentToMongooseModel(report, data) {
 		time,
 		body
 	};
-	// console.log(datum);
-	return;
+	return datum;
 }

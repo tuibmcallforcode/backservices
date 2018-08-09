@@ -1,58 +1,71 @@
-import { insertRelief, insertPdc } from "../../controllers/crawler";
-
-// // for test
-// import { readFileSync } from "fs";
-// import { join } from "path";
-// let testPath = join(__dirname, "../../../testcase/crawler/");
-// let testCase = JSON.parse(readFileSync(testPath + "relief.json"));
-// let testCasePdc = JSON.parse(readFileSync(testPath + "pdc.json"));
-
-async function clawHandler(ctx) {
+import * as pdc from "../../controllers/crawler/pdc";
+import * as relief from "../../controllers/crawler/relief";
+async function pdcStreamHandler(ctx) {
 	try {
-		const { field } = ctx.request.body;
-		const obj = await insertRelief(field);
-		ctx.body = Object.assign({}, { message: "success" }, obj);
+		ctx.set("Content-disposition", `attachment; filename=pdc_${new Date()}`);
+		ctx.set("Content-type", "application/json");
+		const s = await pdc.crawlToStream();
+		ctx.body = s;
 	} catch (e) {
-		ctx.throw(400, e.message);
+		ctx.throw(400, e.stack || e);
 	}
 }
 
-async function clawHandlerTest(ctx) {
+async function pdcDBHandler(ctx) {
 	try {
-		const obj = await insertRelief(testCase);
-		ctx.body = Object.assign({}, { message: "success" }, obj);
+		const result = await pdc.crawlToDB();
+		ctx.body = result;
 	} catch (e) {
-		ctx.throw(400, e.message);
+		ctx.throw(400, e.stack || e);
 	}
 }
 
-async function pdcHandlerTest(ctx) {
+async function reliefStreamHandler(ctx) {
 	try {
-		const obj = await insertPdc(testCasePdc);
-		ctx.body = Object.assign({}, { message: "success" }, obj);
+		const { offset, query } = ctx.query;
+		ctx.set("Content-disposition", `attachment; filename=relief_${new Date()}`);
+		ctx.set("Content-type", "application/json");
+		const s = await relief.crawlToStream({ offset, query }, {});
+		ctx.body = s;
 	} catch (e) {
-		ctx.throw(400, e.message);
+		ctx.throw(400, e.stack || e);
+	}
+}
+
+async function reliefDBHandler(ctx) {
+	try {
+		const { offset, query } = ctx.query;
+		const result = await relief.crawlToDB({ offset, query }, {});
+		ctx.body = result;
+	} catch (e) {
+		ctx.throw(400, e.stack || e);
 	}
 }
 
 const routes = [
 	{
 		method: "post",
-		path: "/",
+		path: `/pdc/stream`,
 		middlewares: [],
-		handler: clawHandler
+		handler: pdcStreamHandler
 	},
 	{
-		method: "get",
-		path: "/test",
+		method: "post",
+		path: `/pdc/db`,
 		middlewares: [],
-		handler: clawHandlerTest
+		handler: pdcDBHandler
 	},
 	{
-		method: "get",
-		path: "/pdc-test",
+		method: "post",
+		path: `/relief/stream`,
 		middlewares: [],
-		handler: pdcHandlerTest
+		handler: reliefStreamHandler
+	},
+	{
+		method: "post",
+		path: `/relief/db`,
+		middlewares: [],
+		handler: reliefDBHandler
 	}
 ];
 

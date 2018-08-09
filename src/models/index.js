@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 const connURL = process.env.MONGO_CONN;
 const dbName = process.env.MONGO_DB;
 const conn = `${connURL}${dbName}?authSource=admin`;
+// mongoose.set("debug", true);
 
 try {
 	logger.debug("connecting to mongodb querystring %s", conn);
@@ -31,7 +32,7 @@ readdir(__dirname, (err, files) => {
 		/*
 		* initializes all models and sources them as .model-name
 		*/
-		if (file !== "index.js") {
+		if (file !== "index.js" && file !== ".gitkeep") {
 			const moduleName = file.split(".")[0];
 			exports[moduleName] = require("./" + moduleName);
 		}

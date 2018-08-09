@@ -1,7 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+import mongoose from "mongoose";
 
-var analyzedSchema = new Schema({
+var analyzedSchema = new mongoose.Schema({
 	usage: { text_units: Number, text_characters: Number, features: Number },
 	semantic_roles: [
 		{
@@ -81,5 +80,5 @@ var analyzedSchema = new Schema({
 	categories: [{ score: Number, label: String }]
 });
 
-const Analyzed = mongoose.model("analyzed", analyzedSchema);
-module.exports = Analyzed;
+const Analyzed = mongoose.model("reliefweb_analyzed", analyzedSchema);
+export let model = Analyzed;
