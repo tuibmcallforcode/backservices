@@ -85,7 +85,7 @@ function formatDatumToModel(JSONData) {
 function getDisastersReport() {
 	return new Promise(async (resolve, reject) => {
 		const API_URL =
-			"https://api.reliefweb.int/v1/disasters?appname=tuibmcfc&limit=1000&sort[]=date:desc";
+			"https://api.reliefweb.int/v1/disasters?appname=tuibmcfc&limit=10&sort[]=date:desc";
 
 		const query = {
 			url: API_URL,

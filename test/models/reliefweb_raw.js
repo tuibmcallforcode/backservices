@@ -29,8 +29,10 @@ describe("Request reliefweb", function() {
 			offset: 0
 			// query: "earthquake"
 		});
+
 		const content = await _fetchReportsContentFromReportURLList([data[0].href]);
-		_mapContentToMongooseModel(data[0], content);
+
+		_mapContentToMongooseModel(data[0], content[0].data[0]);
 	});
 	it("should runs fetchRawReliefWeb fine", async function() {
 		const results = await fetchRawReliefWeb({

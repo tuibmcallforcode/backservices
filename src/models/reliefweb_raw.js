@@ -122,7 +122,14 @@ export function _fetchReportsContentFromReportURLList(reportURLList = []) {
 }
 
 export function _mapContentToMongooseModel(report, data) {
+	// console.log("----------report.fields--------");
+	// console.log("%o", report.fields);
+	// console.log("------------------");
+	// console.log("----------data.fields--------");
+	// console.log("%o", data.fields);
+	// console.log("------------------");
 	report.fields = Object.assign(report.fields, data.fields);
+	console.log("----------report--------");
 	console.log("%o", report);
 	console.log("------------------");
 
@@ -153,6 +160,6 @@ export function _mapContentToMongooseModel(report, data) {
 		time,
 		body
 	};
-	console.log(datum);
+	// console.log(datum);
 	return;
 }
