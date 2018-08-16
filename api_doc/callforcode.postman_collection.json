@@ -185,6 +185,49 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "save relief analysed to db",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/crawler/analyzed/relief/db",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"analyzed",
+						"relief",
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get analysed relief",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/app/analysed",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"analysed"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
+
