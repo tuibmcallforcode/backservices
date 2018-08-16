@@ -1,84 +1,18 @@
 import mongoose from "mongoose";
 
-var analyzedSchema = new mongoose.Schema({
-	usage: { text_units: Number, text_characters: Number, features: Number },
-	semantic_roles: [
-		{
-			subject: {
-				text: String
-			},
-			sentence: String,
-			object: String,
-			action: {
-				verb: { text: String, tense: String },
-				text: String,
-				normalized: String
-			}
-		}
-	],
-	relations: [
-		{
-			type: String,
-			sentence: String,
-			score: 0.889063,
-			arguments: [
-				{
-					text: String,
-					location: [209, 248],
-					entities: [
-						{
-							type: String,
-							text: String
-						}
-					]
-				},
-				{
-					text: String,
-					location: [187, 201],
-					entities: [
-						{
-							type: String,
-							text: String,
-							disambiguation: { subtype: [String] }
-						}
-					]
-				}
-			]
-		}
-	],
-	language: String,
-	keywords: [
-		{
-			text: String,
-			sentiment: { score: Number, label: String },
-			relevance: Number,
-			emotion: {
-				sadness: Number,
-				joy: Number,
-				fear: Number,
-				disgust: Number,
-				anger: Number
-			}
-		}
-	],
-	entities: [
-		{
-			type: String,
-			text: String,
-			sentiment: { score: Number, label: String },
-			relevance: Number,
-			emotion: {
-				sadness: Number,
-				joy: Number,
-				fear: Number,
-				disgust: Number,
-				anger: Number
-			},
-			count: Number
-		}
-	],
-	categories: [{ score: Number, label: String }]
+const analysedSchema = new mongoose.Schema({
+	relief_id: Number,
+	title: String, //hazard_Name
+	description: String, //description
+	source: String, //snc_url
+	time: String, //update_Date
+	severity: String, //severity_ID
+	latitude: String, //latitude
+	longitude: String, //longtitude
+	body: String,
+	brief_body: String,
+	categories: String,
 });
 
-const Analyzed = mongoose.model("reliefweb_analyzed", analyzedSchema);
-export let model = Analyzed;
+const Analysed = mongoose.model("reliefweb_analysed", analysedSchema);
+export let model = Analysed;

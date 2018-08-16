@@ -1,5 +1,7 @@
 import * as pdc from "../../controllers/crawler/pdc";
 import * as relief from "../../controllers/crawler/relief";
+import * as analyzed from "../../controllers/crawler/analysed";
+
 async function pdcStreamHandler(ctx) {
 	try {
 		ctx.set("Content-disposition", `attachment; filename=pdc_${new Date()}`);
@@ -42,6 +44,15 @@ async function reliefDBHandler(ctx) {
 	}
 }
 
+async function reliefAnalyzedHandler(ctx) {
+	try {
+		const result = await analyzed.startAnalyse();	
+		ctx.body = result;
+	} catch (e) {
+		ctx.throw(400, e.stack || e);
+	}
+}
+
 const routes = [
 	{
 		method: "post",
@@ -66,6 +77,12 @@ const routes = [
 		path: `/relief/db`,
 		middlewares: [],
 		handler: reliefDBHandler
+	},
+	{
+		method: "get",
+		path: `/analyzed/relief/db`,
+		middlewares: [],
+		handler: reliefAnalyzedHandler
 	}
 ];
 

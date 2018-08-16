@@ -12,7 +12,8 @@ const VERSION = "2018-03-16";
 
 const nluParams = {
 	features: {
-		semantic_roles: {}
+		semantic_roles: {},
+		categories: {}
 	}
 };
 
@@ -41,7 +42,7 @@ function analyzeAsync(parameters) {
 }
 
 export async function analyze(text) {
-	textDebug = text.match(/[\s\S]{1,20}/g) || [];
+	const textDebug = text.match(/[\s\S]{1,20}/g) || [];
 	logger.debug("analying %s, params %O", textDebug, nluParams);
 	const parameters = Object.assign({}, { text }, nluParams);
 	return await analyzeAsync(parameters);
