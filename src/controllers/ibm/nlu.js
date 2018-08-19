@@ -42,7 +42,7 @@ function analyzeAsync(parameters) {
 }
 
 export async function analyze(text) {
-	const textDebug = text.match(/[\s\S]{1,20}/g) || [];
+	const textDebug = text.substring(0, 20);
 	logger.debug("analying %s, params %O", textDebug, nluParams);
 	const parameters = Object.assign({}, { text }, nluParams);
 	return await analyzeAsync(parameters);
