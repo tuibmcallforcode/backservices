@@ -9,7 +9,7 @@ export async function crawlToStream({ offset = 0, query }) {
 		{}
 	);
 	const s = new Readable();
-	s._read = () => {}; // redundant? see update below
+	s._read = () => {};
 	s.push(JSON.stringify(reliefWebRawModelObjects));
 	s.push(null);
 	return s;

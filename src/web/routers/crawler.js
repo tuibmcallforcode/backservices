@@ -79,7 +79,7 @@ const routes = [
 		handler: reliefDBHandler
 	},
 	{
-		method: "get",
+		method: "post",
 		path: `/analyzed/relief/db`,
 		middlewares: [],
 		handler: reliefAnalyzedHandler
