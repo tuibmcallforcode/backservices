@@ -14,10 +14,13 @@ const reliefwebRawSchema = new Schema({
 	source: String, //snc_url
 	time: String, //update_Date
 	severity: String, //severity_ID
-	latitude: String, //latitude
-	longitude: String, //longtitude
+	loc: {
+		type: { type: String, default: "Point" },
+		coordinates: [Number]
+	},
 	body: String
 });
+reliefwebRawSchema.index({ loc: "2dsphere" });
 
 let ReliefwebRaw = mongoose.model("reliefweb_raw", reliefwebRawSchema);
 export let model = ReliefwebRaw;
@@ -146,13 +149,14 @@ export function _mapContentToModel(data) {
 	const datum = {
 		relief_id,
 		title,
-		latitude,
-		longitude,
 		severity,
 		description,
 		source,
 		time,
-		body
+		body,
+		loc: {
+			coordinates: [longitude, latitude]
+		}
 	};
 	return datum;
 }

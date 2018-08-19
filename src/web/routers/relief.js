@@ -1,7 +1,7 @@
 import {
 	fetchRelieftWeb,
 	getAllReliefData
-} from "../../controllers/crawler/relief";
+} from "../../controllers/app/relief";
 
 async function reliefHandler(ctx) {
 	try {
