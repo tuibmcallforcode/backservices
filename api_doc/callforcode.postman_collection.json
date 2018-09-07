@@ -21,15 +21,9 @@
 				},
 				"url": {
 					"raw": "localhost:8080/ibm/nlu/analyze",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"ibm",
-						"nlu",
-						"analyze"
-					]
+					"path": ["ibm", "nlu", "analyze"]
 				}
 			},
 			"response": []
@@ -49,15 +43,10 @@
 					"raw": "{\n  \"text\": \"Hello\",\n  \"target\":\"es\",\n  \"source\":\"en\"\n}"
 				},
 				"url": {
-					"raw": "localhost:3000/ibm/translate",
-					"host": [
-						"localhost"
-					],
+					"raw": "localhost:8080/ibm/translate",
+					"host": ["localhost"],
 					"port": "3000",
-					"path": [
-						"ibm",
-						"translate"
-					]
+					"path": ["ibm", "translate"]
 				}
 			},
 			"response": []
@@ -70,15 +59,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/crawler/pdc/db",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"crawler",
-						"pdc",
-						"db"
-					]
+					"path": ["crawler", "pdc", "db"]
 				}
 			},
 			"response": []
@@ -91,15 +74,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/crawler/relief/db",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"crawler",
-						"relief",
-						"db"
-					]
+					"path": ["crawler", "relief", "db"]
 				}
 			},
 			"response": []
@@ -112,15 +89,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/crawler/pdc/stream",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"crawler",
-						"pdc",
-						"stream"
-					]
+					"path": ["crawler", "pdc", "stream"]
 				}
 			},
 			"response": []
@@ -133,15 +104,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/crawler/relief/stream",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"crawler",
-						"relief",
-						"stream"
-					]
+					"path": ["crawler", "relief", "stream"]
 				}
 			},
 			"response": []
@@ -154,14 +119,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/app/relief_raws",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"app",
-						"relief_raws"
-					]
+					"path": ["app", "relief_raws"]
 				}
 			},
 			"response": []
@@ -174,14 +134,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/app/pdcs",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"app",
-						"pdcs"
-					]
+					"path": ["app", "pdcs"]
 				}
 			},
 			"response": []
@@ -194,16 +149,9 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/crawler/analyzed/relief/db",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"crawler",
-						"analyzed",
-						"relief",
-						"db"
-					]
+					"path": ["crawler", "analyzed", "relief", "db"]
 				}
 			},
 			"response": []
@@ -216,18 +164,12 @@
 				"body": {},
 				"url": {
 					"raw": "localhost:8080/app/analysed",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"app",
-						"analysed"
-					]
+					"path": ["app", "analysed"]
 				}
 			},
 			"response": []
 		}
 	]
 }
-
