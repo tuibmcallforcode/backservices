@@ -45,7 +45,7 @@
 				"url": {
 					"raw": "localhost:8080/ibm/translate",
 					"host": ["localhost"],
-					"port": "3000",
+					"port": "8080",
 					"path": ["ibm", "translate"]
 				}
 			},
