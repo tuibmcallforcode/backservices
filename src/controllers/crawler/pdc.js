@@ -36,3 +36,12 @@ export async function crawlToDB() {
 		return result;
 	}
 }
+
+export function getAllPDCData() {
+	return new Promise((resolve, reject) => {
+		pdc.model
+			.find({})
+			.then(resolve)
+			.catch(reject);
+	});
+}

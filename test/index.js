@@ -14,8 +14,9 @@ describe("top", function() {
 	beforeEach(function() {
 		console.log("running something before each test");
 	});
-	importTest("model:reliefweb_raw", "./models/reliefweb_raw");
-	importTest("model:pdc", "./models/pdc");
+	// importTest("model:reliefweb_raw", "./models/reliefweb_raw");
+	// importTest("model:pdc", "./models/pdc");
+	importTest("model:prepareness", "./models/prepareness");
 	after(function() {
 		console.log("after all tests");
 	});

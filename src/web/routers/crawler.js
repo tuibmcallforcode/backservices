@@ -1,6 +1,7 @@
 import * as pdc from "../../controllers/crawler/pdc";
 import * as relief from "../../controllers/crawler/relief";
 import * as analyzed from "../../controllers/crawler/analysed";
+import * as readygov from "../../controllers/crawler/readygov";
 
 async function pdcStreamHandler(ctx) {
 	try {
@@ -46,7 +47,16 @@ async function reliefDBHandler(ctx) {
 
 async function reliefAnalyzedHandler(ctx) {
 	try {
-		const result = await analyzed.startAnalyse();	
+		const result = await analyzed.startAnalyse();
+		ctx.body = result;
+	} catch (e) {
+		ctx.throw(400, e.stack || e);
+	}
+}
+
+async function readygovDBHandler(ctx) {
+	try {
+		const result = await readygov.crawlToDB();
 		ctx.body = result;
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
@@ -83,6 +93,12 @@ const routes = [
 		path: `/analyzed/relief/db`,
 		middlewares: [],
 		handler: reliefAnalyzedHandler
+	},
+	{
+		method: "post",
+		path: `/prepareness/readygov/db`,
+		middlewares: [],
+		handler: readygovDBHandler
 	}
 ];
 

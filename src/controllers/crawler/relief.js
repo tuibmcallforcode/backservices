@@ -46,11 +46,3 @@ export async function crawlToDB({ offset = 0, query }) {
 		return result;
 	}
 }
-
-export function getAllPDCData() {
-	return new Promise((resolve, reject) => {
-		PDC.find({})
-			.then(resolve)
-			.catch(reject);
-	});
-}
