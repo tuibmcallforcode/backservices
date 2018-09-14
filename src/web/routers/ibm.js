@@ -1,5 +1,6 @@
 import { analyze } from "../../controllers/ibm/nlu.js";
 import { translate } from "../../controllers/ibm/translate.js";
+import { forecastHourlyWeather48hours } from "../../controllers/ibm/weather";
 
 async function nluAnalyzeHandler(ctx) {
 	const { text } = ctx.request.body;
@@ -12,6 +13,13 @@ async function translateHandler(ctx) {
 	let translated = await translate({ text, target, source });
 	ctx.body = translated;
 }
+
+async function weatherHandler(ctx) {
+	const { latitude, longitude } = ctx.request.body;
+	const forecasts = await forecastHourlyWeather48hours({ latitude, longitude });
+	ctx.body = forecasts;
+}
+
 const routes = [
 	{
 		method: "post",
@@ -24,6 +32,12 @@ const routes = [
 		path: "/translate",
 		middlewares: [],
 		handler: translateHandler
+	},
+	{
+		method: "post",
+		path: "/weather",
+		middlewares: [],
+		handler: weatherHandler
 	}
 ];
 
