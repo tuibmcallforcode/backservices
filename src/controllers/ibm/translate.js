@@ -22,7 +22,7 @@ const languageTranslator = new LanguageTranslatorV3(
 	Object.assign({}, { version: VERSION }, authParams)
 );
 
-function translateAsync(parameters) {
+export function translateAsync(parameters) {
 	return new Promise((resolve, reject) => {
 		languageTranslator.translate(parameters, (err, response) => {
 			if (err) {
@@ -41,6 +41,6 @@ export async function translate({ text, source, target }) {
 
 	const { translations } = await translateAsync(parameters);
 	const { translation } = translations[0];
-	
+
 	return translation;
 }

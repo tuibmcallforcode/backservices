@@ -46,7 +46,7 @@ async function reliefDBHandler(ctx) {
 
 async function reliefAnalyzedHandler(ctx) {
 	try {
-		const result = await analyzed.startAnalyse();	
+		const result = await analyzed.startAnalyse();
 		ctx.body = result;
 	} catch (e) {
 		ctx.throw(400, e.stack || e);

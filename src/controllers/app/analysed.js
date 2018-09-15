@@ -1,57 +1,35 @@
 import { reliefweb_analysed } from "../../models";
-import { translateAnalysed } from "../crawler/analysed";
 
-export async function getAll(query) {
-	if (query) {
-		const { limit, page, target } = query;
-		const data = await reliefweb_analysed.model
-			.find({}, { _id: 0, __v: 0 })
-			.limit(Number(limit))
-			.skip(Number(page));
-		if (target) {
-			const results = [];
-			for (let value of data) {
-				const dataObj = value.toObject();
-				let {
-					relief_id,
-					title, //hazard_Name
-					description, //description
-					source, //snc_url
-					time, //update_Date
-					severity, //severity_ID
-					loc,
-					latitude, //latitude
-					longitude, //longtitude
-					body,
-					brief_body,
-					categories
-				} = dataObj;
-				let translateResult = await translateAnalysed({target}, { relief_id });
-				let { detail } = translateResult;
-				detail = detail.find(data => {
-					if (data.language === target) return data;
-				});
-				
-				const result = {
-					relief_id,
-					title, //hazard_Name
-					description, //description
-					source, //snc_url
-					time, //update_Date
-					severity, //severity_ID
-					loc,
-					latitude, //latitude
-					longitude, //longtitude
-					body,
-					brief_body,
-					categories,
-					...detail
-				};
-				results.push(result);
-			}
-			return results;
-		}
-		return data;
-	}
+export async function getAll() {
 	return await reliefweb_analysed.model.find({});
+}
+
+export async function getPaginated({ limit = 0, page = 0, target = null }) {
+	const documents = await reliefweb_analysed.model
+		.find({})
+		.limit(Number(limit))
+		.skip(Number(page));
+
+	if (target) {
+		const results = [];
+		for (let doc of documents) {
+			doc = await doc.translate({ targetLan: target });
+			results.push({
+				relief_id: doc.relief_id,
+				title: doc.translated[target].title,
+				description: doc.translated[target].description,
+				source: doc.source,
+				time: doc.time,
+				severity: doc.severity,
+				loc: doc.loc,
+				latitude: doc.latitude,
+				longitude: doc.longitude,
+				body: doc.translated[target].body,
+				brief_body: doc.translated[target].brief_body,
+				categories: doc.categories
+			});
+		}
+		return results;
+	}
+	return data;
 }
