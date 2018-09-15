@@ -11,9 +11,13 @@ const pdcSchema = new Schema({
 	source: String, //snc_url
 	time: String, //update_Date
 	severity: String, //severity_ID
-	latitude: String, //latitude
-	longitude: String //longtitude
+	loc: {
+		type: { type: String, default: "Point" },
+		coordinates: [Number]
+	}
 });
+
+pdcSchema.index({ loc: "2dsphere" });
 
 const PDC = mongoose.model("pdc", pdcSchema);
 export let model = PDC;
@@ -51,8 +55,8 @@ export function _mapPDCToModel(pdcData) {
 	const {
 		uuid: pdc_id,
 		hazard_Name: title,
-		latitude,
 		longitude,
+		latitude,
 		severity_ID: severity,
 		description,
 		snc_url: source,
@@ -62,8 +66,10 @@ export function _mapPDCToModel(pdcData) {
 	return {
 		pdc_id,
 		title,
-		latitude,
-		longitude,
+		loc: {
+			type: "Point",
+			coordinates: [parseFloat(longitude), parseFloat(latitude)]
+		},
 		severity,
 		description,
 		source,

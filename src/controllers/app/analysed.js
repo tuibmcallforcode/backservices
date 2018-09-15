@@ -4,9 +4,31 @@ export async function getAll() {
 	return await reliefweb_analysed.model.find({});
 }
 
-export async function getPaginated({ limit = 0, page = 0, target = null }) {
+export async function getPaginated({
+	limit = 0,
+	page = 0,
+	target = null,
+	near = false,
+	lat,
+	lon
+}) {
+	let q = {};
+	if (near) {
+		const maxDistance = 1000000;
+		q = {
+			loc: {
+				$nearSphere: {
+					$geometry: {
+						type: "Point",
+						coordinates: [lon, lat]
+					},
+					$maxDistance: maxDistance
+				}
+			}
+		};
+	}
 	const documents = await reliefweb_analysed.model
-		.find({})
+		.find(q)
 		.limit(Number(limit))
 		.skip(Number(page));
 

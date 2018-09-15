@@ -155,6 +155,7 @@ export function _mapContentToModel(data) {
 		time,
 		body,
 		loc: {
+			type: "Point",
 			coordinates: [longitude, latitude]
 		}
 	};

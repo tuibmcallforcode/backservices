@@ -1,4 +1,7 @@
-import { getAll as getAllPDC } from "../../controllers/app/pdc.js";
+import {
+	getAll as getAllPDC,
+	getNear as getNearPDC
+} from "../../controllers/app/pdc.js";
 import { getAll as getAllReliefRaw } from "../../controllers/app/relief";
 import { getByCategory } from "../../controllers/app/prepareness";
 import {
@@ -8,7 +11,11 @@ import {
 
 async function getPDCHandler(ctx) {
 	try {
-		ctx.body = await getAllPDC({});
+		if (ctx.query.near && ctx.query.lat && ctx.query.lon) {
+			ctx.body = await getNearPDC(ctx.query);
+		} else {
+			ctx.body = await getAllPDC({});
+		}
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
 	}
