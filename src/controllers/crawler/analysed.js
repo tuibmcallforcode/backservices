@@ -2,6 +2,7 @@ import { analyze } from "../ibm/nlu";
 import { reliefweb_analysed } from "../../models";
 import { reliefweb_raw } from "../../models";
 import logger from "../../logger";
+import { translate } from "../../controllers/ibm/translate";
 
 const categories = [
 	"flood",

@@ -1,7 +1,10 @@
 import { getAll as getAllPDC } from "../../controllers/app/pdc.js";
 import { getAll as getAllReliefRaw } from "../../controllers/app/relief";
-import { getAll as getAllAnalysed } from "../../controllers/app/analysed";
 import { getByCategory } from "../../controllers/app/prepareness";
+import {
+	getAll as getAllAnalysed,
+	getPaginated
+} from "../../controllers/app/analysed";
 
 async function getPDCHandler(ctx) {
 	try {
@@ -12,14 +15,18 @@ async function getPDCHandler(ctx) {
 }
 async function getReliefRawHandler(ctx) {
 	try {
-		ctx.body = await getAllReliefRaw({});
+		ctx.body = await getAllReliefRaw();
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
 	}
 }
 async function getAnalyzedHandler(ctx) {
 	try {
-		ctx.body = await getAllAnalysed({});
+		if (ctx.query.limit && ctx.query.page) {
+			ctx.body = await getPaginated(ctx.query);
+		} else {
+			ctx.body = await getAllAnalysed();
+		}
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
 	}
