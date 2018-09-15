@@ -15,7 +15,16 @@ const analysedSchema = new mongoose.Schema({
 	longitude: String, //longtitude
 	body: String,
 	brief_body: String,
-	categories: String
+	categories: String,
+	detail: [
+		{
+			language: String,
+			title: String, //hazard_Name
+			description: String, //description
+			body: String,
+			brief_body: String
+		}
+	]
 });
 analysedSchema.index({ loc: "2dsphere" });
 

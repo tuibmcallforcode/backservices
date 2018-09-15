@@ -39,5 +39,8 @@ export async function translate({ text, source, target }) {
 	const parameters = { text, source, target };
 	// logger.debug("translating %s, params %O", nluParams);
 
-	return await translateAsync(parameters);
+	const { translations } = await translateAsync(parameters);
+	const { translation } = translations[0];
+	
+	return translation;
 }

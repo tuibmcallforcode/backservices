@@ -18,7 +18,7 @@ async function getReliefRawHandler(ctx) {
 }
 async function getAnalyzedHandler(ctx) {
 	try {
-		ctx.body = await getAllAnalysed({});
+		ctx.body = await getAllAnalysed(ctx.query);
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
 	}
@@ -42,7 +42,7 @@ const routes = [
 		path: "/analysed",
 		middlewares: [],
 		handler: getAnalyzedHandler
-	}
+	},
 ];
 
 export default routes;
