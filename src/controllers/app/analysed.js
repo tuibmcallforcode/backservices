@@ -53,5 +53,5 @@ export async function getPaginated({
 		}
 		return results;
 	}
-	return data;
+	return documents;
 }
