@@ -3,7 +3,7 @@ import {
 	getNear as getNearPDC
 } from "../../controllers/app/pdc.js";
 import { getAll as getAllReliefRaw } from "../../controllers/app/relief";
-import { getByCategory } from "../../controllers/app/prepareness";
+import { getByCategory,getTranslateByCategory } from "../../controllers/app/prepareness";
 import {
 	getAll as getAllAnalysed,
 	getPaginated
@@ -42,7 +42,11 @@ async function getAnalyzedHandler(ctx) {
 async function getPreparenessHandler(ctx) {
 	try {
 		const { category } = ctx.params;
-		ctx.body = await getByCategory({ category });
+		const { target } = ctx.query;
+		if(target){
+			ctx.body = await getTranslateByCategory({ category,target });
+		}
+		else ctx.body = await getByCategory({ category });
 	} catch (e) {
 		ctx.throw(400, e.stack || e);
 	}
