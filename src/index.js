@@ -1,4 +1,5 @@
-import "../env";
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 
 import { serve, shutdown } from "./web";
 import logger from "./logger";
