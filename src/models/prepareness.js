@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import rp from "request-promise-native";
 import cheerio from "cheerio";
+import { translate } from "../controllers/ibm/translate";
+
 const Schema = mongoose.Schema;
 
-const preparenessSchema = new Schema({
+const preparenessSchema = new mongoose.Schema({
 	category: String,
 
 	descriptionHTML: String,
@@ -18,8 +20,127 @@ const preparenessSchema = new Schema({
 	prepareText: String,
 	duringText: String,
 	afterText: String,
-	sourceText: String
+	sourceText: String,
+
+	translated: { type: Object, default: {} }
 });
+
+preparenessSchema.methods.translate = async function({ targetLan }) {
+	if (this.translated && this.translated[targetLan]) {
+		return this;
+	}
+	const {
+		descriptionHTML,
+		tipsHTML,
+		prepareHTML,
+		duringHTML,
+		afterHTML,
+		sourceHTML,
+
+		descriptionText,
+		tipsText,
+		prepareText,
+		duringText,
+		afterText,
+		sourceText
+	} = this;
+	console.log(afterHTML);
+	
+	let [
+		descriptionHTMLT,
+		tipsHTMLT,
+		prepareHTMLT,
+		duringHTMLT,
+		afterHTMLT,
+		sourceHTMLT,
+
+		descriptionTextT,
+		tipsTextT,
+		prepareTextT,
+		duringTextT,
+		afterTextT,
+		sourceTextT
+	] = await Promise.all([
+		translate({
+			text: descriptionHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: tipsHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: prepareHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: duringHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: afterHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: sourceHTML,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: descriptionText,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: tipsText,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: prepareText,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: duringText,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: afterText,
+			target: targetLan,
+			source: "en"
+		}),
+		translate({
+			text: sourceText,
+			target: targetLan,
+			source: "en"
+		})
+	]);
+	this.translated[targetLan] = {
+		descriptionHTML: descriptionHTMLT,
+		tipsHTML: tipsHTMLT,
+		prepareHTML: prepareHTMLT,
+		duringHTML: duringHTMLT,
+		afterHTML: afterHTMLT,
+		sourceHTML: sourceHTMLT,
+
+		descriptionText: descriptionTextT,
+		tipsText: tipsTextT,
+		prepareText: prepareTextT,
+		duringText: duringTextT,
+		afterText: afterTextT,
+		sourceText: sourceTextT
+	};
+	this.markModified("translated");
+	return this.save();
+};
+
 
 const Prepareness = mongoose.model("prepareness", preparenessSchema);
 export let model = Prepareness;
@@ -36,6 +157,7 @@ const mapCategories = {
 	tornado: "tornado",
 	"nuclear accident": "nuclear-power-plants"
 };
+
 
 const READYGOVURL = "https://www.ready.gov/";
 export async function fetchReadyGOV({ category, mongoose = false }) {
