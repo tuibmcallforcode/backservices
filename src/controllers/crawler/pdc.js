@@ -14,7 +14,7 @@ export async function crawlToStream() {
 
 export async function crawlToDB() {
 	let result = {};
-	const pdcModels = await pdc.fetchPDC({});
+	const pdcModels = await pdc.fetchPDC({ mongoose: true });
 	result.data = pdcModels;
 	try {
 		result.upserted = await Promise.all(
