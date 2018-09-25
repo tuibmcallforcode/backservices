@@ -1,7 +1,8 @@
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 
-import { serve, shutdown } from "./web";
+const { serve, shutdown } = require("web");
+
 import logger from "./logger";
 const port = process.env.PORT || 3000;
 
