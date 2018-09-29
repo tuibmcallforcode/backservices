@@ -1,25 +1,23 @@
-import dotenv from "dotenv";
-dotenv.config({ silent: true });
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
 
-import { serve, shutdown } from "./web";
-import debugMain from "debug";
+const { serve, shutdown } = require("./web");
 
-const port = process.env.PORT || 3000,
-	debug = debugMain("callforcode:main");
+import logger from "./logger";
+const port = process.env.PORT || 3000;
 
 // graceful shutdown
 ["SIGINT", "SIGTERM", "SIGQUIT", "SIGUSR2"].forEach(signal =>
 	process.on(signal, async () => {
-		debug(
-			"receive termination signal, shutting down ",
-			Date().toLocaleUpperCase()
-		);
+		logger.info("receive termination signal, shutting down");
 		try {
 			await shutdown();
+			logger.debug("close webserver success");
 		} catch (e) {
-			console.error("shutdown: ", e);
+			logger.error("shutdown: ", e);
+			process.exit(1);
 		}
-		process.exit();
+		process.exit(0);
 	})
 );
 

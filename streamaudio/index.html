@@ -1,0 +1,165 @@
+<html>
+
+<head>
+    <title>test audio stream</title>
+    <style>
+        #start_button {
+            border: 0;
+            background-color: transparent;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">IBM Speech API Demo</h1>
+    <p style="text-align: center;">Click on the microphone icon and begin speaking for as long as you like.</p>
+
+    <div id="div_start">
+        <button id="start_button" onclick="startButton(event)">
+            <img alt="Start" id="start_img" src="https://www.google.com/intl/en/chrome/assets/common/images/content/mic.gif">
+        </button>
+    </div>
+    <script>
+        function AudioRecorder(params = {}, preInit, onRecordProcessed, onStop) {
+
+            if (!preInit) {
+                throw new Error("promise preInit is not defined")
+            }
+
+            if (!onRecordProcessed) {
+                throw new Error("callback onRecordProcessed is not defined")
+            }
+            if (!onStop) {
+                throw new Error("callback onStop is not defined")
+            }
+            var context;
+            bufferSize = params.bufferSize || 2024;
+            var session = {
+                audio: true,
+                video: false
+            }
+
+            this.init = function () {
+                preInit().then(function () {
+                    navigator.getUserMedia(session, initializeRecorder, onError);
+                });
+            }
+
+            this.close = function () {
+                console.log("closing recorder");
+                context.close();
+                onStop();
+            }
+
+            this.getState = function () {
+                return (context) ? context.state : null;
+            }
+
+            var initializeRecorder = function initializeRecorder(stream) {
+                var audioContext = window.AudioContext;
+                context = new audioContext();
+                var audioInput = context.createMediaStreamSource(stream);
+                var bufferSize = 2048;
+                // create a javascript node
+                var recorder = context.createScriptProcessor(bufferSize, 1, 1);
+                // specify the processing function
+                recorder.onaudioprocess = recorderProcess;
+                // connect stream to our recorder
+                audioInput.connect(recorder);
+                // connect our recorder to the previous destination
+                recorder.connect(context.destination);
+            }
+
+            var recorderProcess = function recorderProcess(e) {
+                var left = e.inputBuffer.getChannelData(0);
+                // call to client
+                // var buf = new Uint8Array(left).buffer;
+
+                // onRecordProcessed(buf)
+                onRecordProcessed(convertFloat32ToInt16(left));
+
+            }
+
+            var convertFloat32ToInt16 = function convertFloat32ToInt16(buffer) {
+                l = buffer.length;
+                buf = new Int16Array(l);
+                while (l--) {
+                    buf[l] = Math.min(1, buffer[l]) * 0x7FFF;
+                }
+                return buf.buffer;
+            }
+
+            var onError = function onError() {
+                console.error("error audiorecorder : ", arguments);
+            }
+        }
+    </script>
+
+    <script>
+        function STTWebSocket(onOpen, onConnectedIBM) {
+            var socket = new WebSocket('ws://127.0.0.1:3000/ws_ibm_stt');
+            // Connection opened
+            socket.addEventListener('open', function (event) {
+                console.log('opened listener ', event);
+                onOpen();
+            });
+
+            // Listen for messages
+            socket.addEventListener('message', function (event) {
+                try{
+                    var data = JSON.parse(event.data)
+                    console.log('Message from server ', data);
+                    if (data && data.status == "open") {
+                        onConnectedIBM();
+                    }
+                }catch(e){
+                    console.error(data)
+                }
+            });
+            return socket
+        }
+    </script>
+
+    <script>
+        var socket;
+        var rec = new AudioRecorder({}, function () {
+            return new Promise((reslove, reject) => {
+                socket = STTWebSocket(function () {
+                    console.log("preInit: connecting to IBM server");
+                }, function onConnectedIBM() {
+                    console.log("preInit: connected to IBM server");
+                    var message = {
+                        action: "start",
+                        "content-type": "audio/l16;rate=44100"
+                    };
+                    socket.send(JSON.stringify(message));
+                    reslove()
+                });
+            })
+
+        }, function (aud) {
+            // console.log(aud);
+            socket.send(aud)
+        }, function () {
+            // send stop to server
+            socket.send(JSON.stringify({ action: "stop" }));
+            // socket.close();
+        });
+    </script>
+
+
+    <script>
+        function startButton(event) {
+            if (rec.getState() == "running") {
+                rec.close()
+                return;
+            }
+            rec.init();
+        }
+
+
+    </script>
+</body>
+
+</html>

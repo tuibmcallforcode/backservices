@@ -29,7 +29,7 @@ function requireAndBuildRouteFromFileList(fileList) {
 			let defaultRoutes = require(importPath);
 			routes = defaultRoutes.default;
 		} catch (e) {
-			throw Error("cannot import file", file, ":", e);
+			throw e;
 		}
 		buildRoute(routes, prefix);
 	});

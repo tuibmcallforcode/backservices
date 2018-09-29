@@ -4,6 +4,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+yarn.lock
+package-lock.json
 
 # Runtime data
 pids
@@ -75,3 +77,11 @@ typings/
 .docker/*
 !.docker/**/.gitkeep
 .vscode
+
+dist/**
+!dist/.gitkeep
+
+*.wav
+
+#MacOS seeds
+.DS_Store

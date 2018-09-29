@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "2340c246-9c72-449d-b8d6-0fa9257edab3",
+		"name": "callforcode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "nlu analyze",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\":\n    \"OCD XII to lead 2nd qtr nationwide earthquake drill in Soccsksargen\"\n}\n"
+				},
+				"url": {
+					"raw": "localhost:8080/ibm/nlu/analyze",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ibm",
+						"nlu",
+						"analyze"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "translate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"Hello\",\n  \"target\":\"es\",\n  \"source\":\"en\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/ibm/translate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ibm",
+						"translate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crawl and save pdc to db",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/crawler/pdc/db",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"pdc",
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crawl and save relief raw to db",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/crawler/relief/db",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"relief",
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crawl and send pdc buffer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/crawler/pdc/stream",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"pdc",
+						"stream"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crawl and send relief raw buffer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/crawler/relief/stream",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"relief",
+						"stream"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crawl and save prepareness to db",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/crawler/prepareness/readygov/db",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"prepareness",
+						"readygov",
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get relief raw",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/app/relief_raws",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"relief_raws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get pdc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/app/pdcs",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"pdcs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save relief analysed to db",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/crawler/analyzed/relief/db",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"crawler",
+						"analyzed",
+						"relief",
+						"db"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get analysed relief",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/app/analysed",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"analysed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get prepareness",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/app/prepareness/:category",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"app",
+						"prepareness",
+						":category"
+					],
+					"variable": [
+						{
+							"key": "category",
+							"value": "flood"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

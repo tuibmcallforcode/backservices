@@ -1,14 +1,5 @@
 {
-  "semi": true,
-  "tabWidth": 1,
-  "useTabs": true,
-  "overrides": [
-    {
-      "files": "*.test.js",
-      "options": {
-        "semi": true,
-        "useTabs": true
-      }
-    }
-  ]
+	"semi": true,
+	"tabWidth": 1,
+	"useTabs": true
 }
